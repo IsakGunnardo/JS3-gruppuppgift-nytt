@@ -16,12 +16,13 @@ export async function getAllUsers() {
     return json;
 }
 
+//används ej än är till post.js
 export async function getOnePosts({ onepost }) {
     let result = await fetch(`https://dummyjson.com/posts/${onepost}`);
     let json = await result.json();
     return json;
 }
-
+//används ej än är till addpost.js
 export function addAPost() {
     
 fetch('https://dummyjson.com/products/add', {

@@ -1,6 +1,6 @@
 
-import userState from "../states/atoms.js";
-import {atom, selector, useRecoilState} from 'recoil';
+//import userState from "../states/atoms.js";
+//import {atom, selector, useRecoilState} from 'recoil';
 
 //skapa en sida utan asides med en titel en textaria
 //rendera ut users i en scroll lista
@@ -10,7 +10,7 @@ import {atom, selector, useRecoilState} from 'recoil';
 export function AddPost() {
     
    //const [users, setUser] = useRecoilState(userState);
-  //creat a user list from API users
+  // people list fungerar bra men får ej userState att fungera i post. 
   function PeopleList({ users }) {
     return (
       <select>
@@ -24,7 +24,7 @@ export function AddPost() {
     <section className="add-post-section">
     
       <label for="usernames">Choose a user:</label>
-     
+      {/*<PeopleList users={users}/>*/}
       <select name="usernames" id="usernames">
         <option value="malin">Malin</option>
         <option value="isak">Isak</option>

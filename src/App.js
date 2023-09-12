@@ -39,7 +39,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home posts={posts} users={users} />} />
         <Route path="/addpost" element={<AddPost />} />
-        <Route path="/post" element={<OnePost posts={posts} />} />
+        <Route path="/post" element={<OnePost />} />
       </Routes>
       <div className="content-container"></div>
         <button className="scroll-btn" onClick={scrollBackTop}>Back to top</button>                 
