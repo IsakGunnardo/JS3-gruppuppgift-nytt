@@ -53,7 +53,7 @@ export function AddPost() {
         <span>markdown mode</span>
       </div>
 
-      <textarea placeholder="Text(optional)" />
+      <textarea placeholder="Text(optional) Max 60 tecken" />
     </section>
   );
 }
