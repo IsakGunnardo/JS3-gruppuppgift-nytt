@@ -4,13 +4,11 @@ export async function getAllPosts() {
     return json;
 }
 
-
 export async function getAllComments() {
     let result = await fetch("https://dummyjson.com/comments");
     let json = await result.json();
     return json;
 }
-
 
 export async function getAllUsers() {
     let result = await fetch("https://dummyjson.com/users");
@@ -24,9 +22,19 @@ export async function getOnePosts({ onepost }) {
     return json;
 }
 
-
-
-
+export function addAPost() {
+    
+fetch('https://dummyjson.com/products/add', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      title: 'BMW Pencil',
+      userId: 1,
+    })
+  })
+  .then(res => res.json())
+  .then(console.log);
+}
 
 
 /*

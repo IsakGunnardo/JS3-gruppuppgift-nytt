@@ -1,5 +1,5 @@
 export function OnePost() {
-    return <></>;
+    return <><h1>Visar en Post</h1></>;
   }
   /*
   import { useState } from "react";

@@ -1,32 +1,18 @@
 import React from "react";
-
+import "./pages.css";
+import { AsideLeft } from "../components/asideleft";
+import { AsideRight } from "../components/asideright";
 import { Main } from "../components/main";
-//import { useEffect, useState } from "react";
-//import { getAllPosts, getAllComments, getAllUsers } from "./api/fetch";
+
+import { useRecoilState } from "recoil";
+import { postState, userState, commentState } from "../states/atoms";
 
 export function Home(props) {
-  console.log("HOME: ", props.users);
-  console.log("HOME POSTS: ", props.posts);
-  /*  const [posts, setPosts] = useState([]);
-  const [comments, setComments] = useState([]);
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    getAllPosts().then((result) => setPosts(result.posts));
-  }, []);
-  
-  useEffect(() => {
-    getAllComments().then((result) => setComments(result.comments))
-  }, []);
-
-  useEffect(() => {
-    getAllUsers().then((result) => setUsers(result.users));
-  }, []);
-   <Main posts={posts} users={users} />
-  */
   return (
-    <>
+    <div className="Home-container">
+      <AsideLeft />
       <Main posts={props.posts} users={props.users} />
-    </>
+      <AsideRight />
+    </div>
   );
 }

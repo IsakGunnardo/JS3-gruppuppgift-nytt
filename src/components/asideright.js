@@ -28,14 +28,14 @@ export function AsideRight() {
         </div>
         <ul>
             <li>
-              <Link to="/">Hem</Link>
+              <Link to="/">Home</Link>
               
             </li>
             <li>
-            <Link to="/post">post</Link>
+            <Link to="/post">Post</Link>
             </li>
             <li>
-            <Link to="/addpost">add post</Link>
+            <Link to="/addpost">Add Post</Link>
             </li>
            
           </ul>
