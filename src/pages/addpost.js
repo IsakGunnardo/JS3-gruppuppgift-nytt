@@ -1,33 +1,30 @@
 
 import userState from "../states/atoms.js";
-import { useRecoilState} from "recoil";
+import {atom, selector, useRecoilState} from 'recoil';
 
 //skapa en sida utan asides med en titel en textaria
 //rendera ut users i en scroll lista
 //creat a user list from API users
 //
-
+//problem med att få globala state att fungera i denna fil, behövs för att rendera ut userlist. 
 export function AddPost() {
     
-    //const [users, setUser] = useRecoilState(userState);
+   //const [users, setUser] = useRecoilState(userState);
   //creat a user list from API users
-  function PeopleList({users}) {
-
-    
-
-  return (
-    
-      users.map((person, index) => (
-        <option key={index}>{person.firstName}</option>
-      ))
-    
-  );
-}
+  function PeopleList({ users }) {
+    return (
+      <select>
+        {users.map((person, index) => (
+          <option value={person} key={index}>{person.firstName}</option>
+        ))}
+      </select>
+    );
+  }
   return (
     <section className="add-post-section">
     
       <label for="usernames">Choose a user:</label>
-      
+     
       <select name="usernames" id="usernames">
         <option value="malin">Malin</option>
         <option value="isak">Isak</option>
@@ -54,6 +51,8 @@ export function AddPost() {
       </div>
 
       <textarea placeholder="Text(optional) Max 60 tecken" />
+      <button>Save Draft</button>
+      <button>Post</button>
     </section>
   );
 }

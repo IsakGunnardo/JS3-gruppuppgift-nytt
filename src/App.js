@@ -33,19 +33,16 @@ function App() {
 
   <Home posts={posts} users={users} />;
 
-
-
   return (
     <>
       <Navigator />
       <Routes>
         <Route path="/" element={<Home posts={posts} users={users} />} />
         <Route path="/addpost" element={<AddPost />} />
-        <Route path="/post" element={<OnePost />} />
+        <Route path="/post" element={<OnePost posts={posts} />} />
       </Routes>
       <div className="content-container"></div>
-        <button className="scroll-btn" onClick={scrollBackTop}>Back to top</button>
-            
+        <button className="scroll-btn" onClick={scrollBackTop}>Back to top</button>                 
     </>
   );
 }
@@ -54,15 +51,6 @@ export default App;
 
 /*
 /*
-function PeopleList({ users }) {
-  return (
-    <ul>
-      {users.map((person, index) => (
-        <li key={index}>{person.firstName}</li>
-      ))}
-    </ul>
-  );
-}
 
 // https://reactrouter.com/en/main/hooks/use-navigate
 

@@ -1,4 +1,4 @@
-//import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 
 export function Main({ posts, users }) {    
     if (Object.keys(users).length === 0) {
@@ -11,6 +11,7 @@ export function Main({ posts, users }) {
       
       return (
         <>
+
           <ul>
             {posts.map((holder, index) => (
               <li key={index} style={{ borderBottom: "1px solid black" }}>
@@ -23,6 +24,7 @@ export function Main({ posts, users }) {
               </li>
             ))}
           </ul>
+
         </>
       );
     }

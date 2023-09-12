@@ -1,5 +1,10 @@
-export function OnePost() {
-    return <><h1>Visar en Post</h1></>;
+export function OnePost({posts}) {
+
+    return <>
+        {/* {posts.map((post) => (
+          <span>{post.body}</span>
+        ))} */}
+    <h1>Visar en Post</h1></>;
   }
   /*
   import { useState } from "react";
