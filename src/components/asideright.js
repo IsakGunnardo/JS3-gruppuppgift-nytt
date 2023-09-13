@@ -8,8 +8,8 @@ export function AsideRight() {
         <div>
           <h2 className="sidebar-right-h2">POPULAR COMMUNITIES</h2>
           <ul>
-            <li>
-              <a href="https://ecutbildning.se">Ec utbildning</a>
+            <li> 
+              <a href="https://ecutbildning.se">Ec utbildning</a>                           
             </li>
             <li>
               <a href="https://react.dev/">React dev</a>
@@ -28,16 +28,14 @@ export function AsideRight() {
         </div>
         <ul>
             <li>
-              <Link to="/">Home</Link>
-              
+              <Link to="/">Home</Link>              
             </li>
             <li>
             <Link to="/post">Post</Link>
             </li>
             <li>
             <Link to="/addpost">Add Post</Link>
-            </li>
-           
+            </li>           
           </ul>
       </aside>
     </>

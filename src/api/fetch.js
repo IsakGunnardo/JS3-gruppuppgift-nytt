@@ -1,7 +1,14 @@
 export async function getAllPosts() {
-    let result = await fetch("https://dummyjson.com/posts");
-    let json = await result.json();
-    return json;
+    try {
+        let result = await fetch("https://dummyjson.com/posts");
+        if (!result.ok) {
+            throw new Error("Fetch failure");
+        }
+        let json = await result.json();
+        return json;
+    } catch (error) {
+        throw error;
+    }               
 }
 
 export async function getAllComments() {

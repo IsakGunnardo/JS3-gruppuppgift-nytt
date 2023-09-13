@@ -1,13 +1,13 @@
 import "./aside.css";
 import { useState } from "react";
 
-export function AsideLeft(){
-    
+export function AsideLeft() {
+
     const [toggle, setToggle] = useState(true);
     const handleClick = () => {
         setToggle(!toggle);
-      };
-
+    };
+ 
     return (
         <aside className="sidebar-left">
             <section>
@@ -16,11 +16,11 @@ export function AsideLeft(){
                 </ul>
             </section>
             <section>
-            <h6>TOPICS</h6>
+                <h6>TOPICS</h6>
 
                 <ul className="sidebar-left-ul">
                     <li onClick={handleClick}>Gaming
-                        <ul className="sidebar-ul-toggle inner-ul"  style={{ display: toggle ? 'none' : 'block'}}>
+                        <ul className="sidebar-ul-toggle inner-ul" style={{ display: toggle ? 'none' : 'block' }}>
                             <li>  hello </li>
                             <li>  hello </li>
                             <li>  hello </li>
@@ -29,31 +29,34 @@ export function AsideLeft(){
 
                         </ul>
                     </li>
-                    <li>Sport
-                    <ul className="sidebar-ul-toggle"></ul>
+                    <li >Sport
+                        <ul className="sidebar-ul-toggle">
+                         
+
+                        </ul>
 
                     </li>
                     <li>Business
-                    <ul className="sidebar-ul-toggle"></ul>
+                        <ul className="sidebar-ul-toggle"></ul>
 
                     </li>
                     <li>Crypto
-                    <ul className="sidebar-ul-toggle"></ul>
+                        <ul className="sidebar-ul-toggle"></ul>
 
                     </li>
                     <li>Television
-                    <ul className="sidebar-ul-toggle"></ul>
+                        <ul className="sidebar-ul-toggle"></ul>
 
                     </li>
                     <li>Celebrity
-                    <ul className="sidebar-ul-toggle"></ul>
+                        <ul className="sidebar-ul-toggle"></ul>
 
                     </li>
                     <button className="sidebar-left-button">See more</button>
                 </ul>
             </section>
-            <section>
-            <h6>RESOURCES</h6>
+            <footer>
+                <h6>RESOURCES</h6>
 
                 <ul className="sidebar-left-ul">
                     <li>About Reddit</li>
@@ -62,12 +65,12 @@ export function AsideLeft(){
                     <button className="sidebar-left-button">See more</button>
 
 
-                <p className="sidebar-left-p">Reddit, inc. © 2023. All rights reserved.</p>
+                    <p className="sidebar-left-p">Reddit, inc. © 2023. All rights reserved.</p>
 
 
                 </ul>
 
-            </section>
+            </footer>
         </aside>
     )
 }

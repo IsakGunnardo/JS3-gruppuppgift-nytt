@@ -15,8 +15,8 @@ import { postState, userState, commentState } from "./states/atoms";
 
 function App() {
   const [posts, setPosts] = useRecoilState(postState);
-  const [comments, setComments] = useState([]);
-  const [users, setUsers] = useState([]);
+  const [comments, setComments] = useRecoilState(commentState);
+  const [users, setUsers] = useRecoilState(userState);
 
   const scrollBackTop = () => {
     window.scrollTo({
@@ -39,7 +39,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home posts={posts} users={users} />} />
         <Route path="/addpost" element={<AddPost />} />
-        <Route path="/post" element={<OnePost />} />
+        <Route path="/post/:id" element={<OnePost />} />
       </Routes>
       <div className="content-container"></div>
         <button className="scroll-btn" onClick={scrollBackTop}>Back to top</button>                 
