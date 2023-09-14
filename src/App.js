@@ -21,7 +21,7 @@ function App() {
   const scrollBackTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   };
 
@@ -39,10 +39,12 @@ function App() {
       <Routes>
         <Route path="/" element={<Home posts={posts} users={users} />} />
         <Route path="/addpost" element={<AddPost />} />
-        <Route path="/post/:id" element={<OnePost />} />
+        <Route path="/post/:id/:firstName/:lastName" element={<OnePost />} />
       </Routes>
       <div className="content-container"></div>
-        <button className="scroll-btn" onClick={scrollBackTop}>Back to top</button>                 
+      <button className="scroll-btn" onClick={scrollBackTop}>
+        Back to top
+      </button>
     </>
   );
 }

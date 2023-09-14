@@ -1,49 +1,47 @@
 export async function getAllPosts() {
-    try {
-        let result = await fetch("https://dummyjson.com/posts");
-        if (!result.ok) {
-            throw new Error("Fetch failure");
-        }
-        let json = await result.json();
-        return json;
-    } catch (error) {
-        throw error;
-    }               
+  try {
+    let result = await fetch("https://dummyjson.com/posts");
+    if (!result.ok) {
+      throw new Error("Fetch failure");
+    }
+    let json = await result.json();
+    return json;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export async function getAllComments() {
-    let result = await fetch("https://dummyjson.com/comments");
-    let json = await result.json();
-    return json;
+  let result = await fetch("https://dummyjson.com/comments");
+  let json = await result.json();
+  return json;
 }
 
 export async function getAllUsers() {
-    let result = await fetch("https://dummyjson.com/users");
-    let json = await result.json();
-    return json;
+  let result = await fetch("https://dummyjson.com/users");
+  let json = await result.json();
+  return json;
 }
 
 //används ej än är till post.js
-export async function getOnePosts({ onepost }) {
-    let result = await fetch(`https://dummyjson.com/posts/${onepost}`);
-    let json = await result.json();
-    return json;
+export async function getOnePosts({ id }) {
+  let result = await fetch(`https://dummyjson.com/posts/${id}`);
+  let json = await result.json();
+  return json;
 }
 //används ej än är till addpost.js
 export function addAPost() {
-    
-fetch('https://dummyjson.com/products/add', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+  fetch("https://dummyjson.com/products/add", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      title: 'BMW Pencil',
+      title: "BMW Pencil",
       userId: 1,
-    })
+    }),
   })
-  .then(res => res.json())
-  .then(console.log);
+    .then((res) => res.json())
+    .then(console.log);
 }
-
 
 /*
 import { useEffect, useState } from "react";
