@@ -10,6 +10,7 @@ export function Main({ posts, users }) {
   } else {
     return (
       <main className="main">
+        <ul></ul>
         <ul>
           {posts.map((holder, index) => (
             <li key={index} style={{ borderBottom: "1px solid black" }}>

@@ -34,7 +34,7 @@ export function AsideRight() {
             <Link to="/post">Post</Link>
             </li>
             <li>
-            <Link to="/addpost">Add Post</Link>
+            <Link to="/addnewpost">Add Post</Link>
             </li>           
           </ul>
       </aside>

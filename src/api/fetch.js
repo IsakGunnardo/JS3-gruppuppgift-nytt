@@ -29,20 +29,23 @@ export async function getOnePosts({ id }) {
   let json = await result.json();
   return json;
 }
-//används ej än är till addpost.js
-export function addAPost() {
-  fetch("https://dummyjson.com/products/add", {
+export async function fetchAPost(title, body, id, ) {
+
+  let result = await fetch("https://dummyjson.com/posts/add", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      title: "BMW Pencil",
-      userId: 1,
-    }),
-  })
-    .then((res) => res.json())
-    .then(console.log);
+      title: title,
+      body: body,
+      Id: 151,
+      userId: id
+    })
+  });
+  let json = await result.json();
+    return json;
 }
 
+   
 /*
 import { useEffect, useState } from "react";
 //Försöka att skapa en 

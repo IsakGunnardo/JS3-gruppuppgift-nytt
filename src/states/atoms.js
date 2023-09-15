@@ -14,3 +14,8 @@ export const userState = atom({
     key: "users",
     default: []
 })
+
+export const addNewPost = atom ({
+    key: "addNewPost",
+    default: ""
+})

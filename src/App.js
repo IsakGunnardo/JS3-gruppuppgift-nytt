@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import React from "react";
 
 import { Home } from "./pages/home";
-import { AddPost } from "./pages/addpost";
+import { AddNewPost } from "./pages/addnewpost";
 import { OnePost } from "./pages/post";
 import { getAllPosts, getAllComments, getAllUsers } from "./api/fetch";
 
@@ -38,7 +38,7 @@ function App() {
       <Navigator />
       <Routes>
         <Route path="/" element={<Home posts={posts} users={users} />} />
-        <Route path="/addpost" element={<AddPost />} />
+       <Route path="/addnewpost" element={<AddNewPost />} />
         <Route path="/post/:id/:firstName/:lastName" element={<OnePost />} />
       </Routes>
       <div className="content-container"></div>
