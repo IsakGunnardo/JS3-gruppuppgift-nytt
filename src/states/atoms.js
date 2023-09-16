@@ -4,6 +4,7 @@ export const postState = atom({
     key: "posting",
     default: []
 })
+// const [postState, setPostState] = useState([])
 
 export const commentState = atom({
     key: "commenting",
@@ -14,3 +15,10 @@ export const userState = atom({
     key: "users",
     default: []
 })
+
+export const addNewPost = atom ({
+    key: "addNewPost",
+    default: {}
+
+})
+

@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom";
 import "./main.css";
-export function Main({ posts, users }) {
+import { RecoilRoot, useRecoilState } from "recoil";
+import { postState, userState } from "../states/atoms";
+
+export function Main() {
+
+  const [users, setUser] = useRecoilState(userState);
+  const [posting, setPosting] = useRecoilState(postState);
+
   if (Object.keys(users).length === 0) {
     return (
       <div>
@@ -11,7 +18,7 @@ export function Main({ posts, users }) {
     return (
       <main className="main">
         <ul>
-          {posts.map((holder, index) => (
+          {posting.map((holder, index) => (
             <li key={index} style={{ borderBottom: "1px solid black" }}>
               <h3>Title: {holder.title}</h3>
               <main>{holder.body}</main>
@@ -21,7 +28,7 @@ export function Main({ posts, users }) {
               <img src={users[index].image} width={25} height={25} />
               <Link
                 to={`/post/${holder.id}/${users[index].firstName}/${users[index].lastName}`}
-              >
+              style={{color: "black"}} className="hover-link">
                 Read More
               </Link>
             </li>

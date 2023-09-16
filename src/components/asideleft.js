@@ -20,7 +20,7 @@ export function AsideLeft() {
 
                 <ul className="sidebar-left-ul">
                     <li onClick={handleClick}>Gaming
-                        <ul className="sidebar-ul-toggle inner-ul" style={{ display: toggle ? 'none' : 'block' }}>
+                        <ul className="sidebar-ul-toggle ul-in-ul" style={{ display: toggle ? 'none' : 'block' }}>
                             <li>  hello </li>
                             <li>  hello </li>
                             <li>  hello </li>

@@ -23,20 +23,20 @@ export async function getAllUsers() {
   return json;
 }
 
-//används ej än är till post.js
 export async function getOnePosts({ id }) {
   let result = await fetch(`https://dummyjson.com/posts/${id}`);
   let json = await result.json();
   return json;
 }
 //används ej än är till addpost.js
-export function addAPost() {
-  fetch("https://dummyjson.com/products/add", {
+export function addAPost(title, text, id) {
+  fetch("https://dummyjson.com/posts/add", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      title: "BMW Pencil",
-      userId: 1,
+      title: title,
+      body: text
+      userId: id,
     }),
   })
     .then((res) => res.json())

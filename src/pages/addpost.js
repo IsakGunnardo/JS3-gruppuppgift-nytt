@@ -1,24 +1,26 @@
 import { userState } from '../states/atoms';
 import {useRecoilState} from 'recoil';
 import { useState } from 'react';
+import { addNewPost } from '../states/atoms';
+
 //skapa en sida utan asides med en titel en textaria
-//rendera ut users i en scroll lista
-//creat a user list from API users
-//
-//problem med att få globala state att fungera i denna fil, behövs för att rendera ut userlist. 
+
+ 
 export function AddPost() {
     
    const [users, setUser] = useRecoilState(userState);
 
-   const [input,setInput] = useState({title: "", text:"" });
-   const [newPost, setNewPost] = useState([])
-
-  const handelChange = e => {
-    const [name,value] = e.target;
-    setInput(() => {
-
-    })
+   const [newPost,setNewPost] = useRecoilState(addNewPost);
+   
+  
+   const handelChange = event => {
+    const { name, value } = event.target;
+    setNewPost((newPost) => ({...newPost, [name]: value}))
+    console.log(newPost)
+    
   }
+  
+
 
   //------------------ render users -------------------------------------------
   function PeopleList({ users }) {
@@ -43,8 +45,13 @@ export function AddPost() {
         <button>Link</button>
         <button>Poll</button>
       </div>
-
-      <input placeholder="Title" 
+     
+      <input 
+      placeholder="Title" 
+      name='title'
+      value={newPost.title}
+      onChange={handelChange}
+      
       />
       <div>
         <button>B</button>
@@ -55,7 +62,13 @@ export function AddPost() {
         <span>markdown mode</span>
       </div>
 
-      <textarea placeholder="Text(optional) Max 60 tecken" 
+      <textarea 
+        placeholder="Text(optional) Max 60 tecken" 
+        name='text'
+        value={newPost.text}
+        onChange={handelChange}
+       
+       
       />
       <button>Save Draft</button>
       <button >Post</button>
