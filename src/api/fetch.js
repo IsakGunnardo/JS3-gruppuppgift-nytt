@@ -31,6 +31,9 @@ export async function getOnePosts({ id }) {
 //används ej än är till addpost.js
 export function addAPost(title, text, id) {
   fetch("https://dummyjson.com/posts/add", {
+export async function fetchAPost(title, body, id, ) {
+
+  let result = await fetch("https://dummyjson.com/posts/add", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -41,8 +44,16 @@ export function addAPost(title, text, id) {
   })
     .then((res) => res.json())
     .then(console.log);
+      body: body,
+      Id: 151,
+      userId: id
+    })
+  });
+  let json = await result.json();
+    return json;
 }
 
+   
 /*
 import { useEffect, useState } from "react";
 //Försöka att skapa en 

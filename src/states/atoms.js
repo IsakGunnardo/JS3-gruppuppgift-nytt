@@ -22,3 +22,5 @@ export const addNewPost = atom ({
 
 })
 
+    default: ""
+})
