@@ -1,0 +1,35 @@
+.modal-open {
+    margin-left: 50%;
+    margin-top: 13%;
+    width: 500px;
+    height: 500px;
+     
+     z-index: 1000;
+     padding: 5px;
+     position: absolute;
+     transform: translate(-50%,-50%);
+  
+   
+ }
+ .modal-open {
+     display: flex;
+     flex-wrap: wrap;
+    flex-direction: column;
+    text-aline: center;
+    align-items: center;
+    justify-content: center;   
+    background-color:rgba(234, 232, 232, 0.895);
+     border-radius: 2 px solid grey; 
+     font-size: 1.2rem;
+     
+ 
+ 
+ }
+ 
+ .close-modal-btn{
+     margin-top: 50px;
+     margin-bottom: 0;
+     background-color: aliceblue;
+ 
+ }
+ 

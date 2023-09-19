@@ -19,7 +19,7 @@ export function AsideLeft() {
                 <h6>TOPICS</h6>
 
                 <ul className="sidebar-left-ul">
-                    <li onClick={handleClick}>Gaming
+                    <li onClick={handleClick}>Gaming      <i class="arrow down"></i>
                         <ul className="sidebar-ul-toggle ul-in-ul" style={{ display: toggle ? 'none' : 'block' }}>
                             <li>  hello </li>
                             <li>  hello </li>

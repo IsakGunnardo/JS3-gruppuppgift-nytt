@@ -10,9 +10,9 @@ import { postState, userState, commentState } from "../states/atoms";
 export function Home({posts, users}) {
   return (
     <div className="Home-container">
-      <AsideLeft />
+
       <Main posts={posts} users={users} />
-      <AsideRight />
+
     </div>
   );
 }

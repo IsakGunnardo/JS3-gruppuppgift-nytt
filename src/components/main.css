@@ -1,7 +1,23 @@
-.main{
+
+body{
+    background-color: #ffffff;
+  }
+  .main{
     width: 70%;
     margin: 30px 10px 5px 0 ;
 
 
 }
 
+.add-btn{
+
+width: 100px;
+height: 40px;
+border: none;
+background-color: transparent;
+}
+
+.add-btn:hover{
+    border-radius: 20px;
+    background-color: grey;
+}

@@ -1,4 +1,5 @@
 import "./App.css";
+import "./components/aside.css";
 import { useEffect, useState } from "react";
 import React from "react";
 import { Main } from "./components/main";
@@ -6,9 +7,12 @@ import { Home } from "./pages/home";
 import { AddNewPost } from "./pages/addnewpost";
 import { OnePost } from "./pages/post";
 import { getAllPosts, getAllComments, getAllUsers } from "./api/fetch";
+import { AsideLeft } from "./components/asideleft";
+import { AsideRight } from "./components/asideright";
+
 
 import Navigator from "./components/navigator";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 
 import { useRecoilState } from "recoil";
 import { postState, userState, commentState } from "./states/atoms";
@@ -17,6 +21,9 @@ function App() {
   const [posts, setPosts] = useRecoilState(postState);
   const [comments, setComments] = useRecoilState(commentState);
   const [users, setUsers] = useRecoilState(userState);
+
+  const location = useLocation();
+  const isAddNewPostRoute = location.pathname === "/addnewpost";
 
   const scrollBackTop = () => {
     window.scrollTo({
@@ -33,16 +40,33 @@ function App() {
 
   <Home posts={posts} users={users} />;
 
+  
+
   return (
     <>
       <Navigator />
+      <div className="container-appjs">
+      {!isAddNewPostRoute && (
+        <>  
+          <AsideLeft />
 
+          <AsideRight />
+        </>
+      )}
       <Routes>
+        
         <Route path="/" element={<Home posts={posts} users={users} />} />
-       <Route path="/addnewpost" element={<AddNewPost />} />
+        <Route path="/addnewpost" element={<AddNewPost />} />
         <Route path="/post/:id/:firstName/:lastName" element={<OnePost />} />
-
       </Routes>
+     
+      
+    
+      
+      
+      </div>
+
+      
       <div className="content-container"></div>
       <button className="scroll-btn" onClick={scrollBackTop}>
         Back to top
@@ -52,6 +76,8 @@ function App() {
 }
 
 export default App;
+
+
 
 /*
 /*
@@ -87,3 +113,14 @@ function CommentKomponent ({ comments }) {
 
 //console.log("USERS: ", users);
 //console.log("POSTS: ", posts);
+
+
+
+
+/*
+const AddPostViewConst = {} => (
+  <div>
+    <AddNewPost />
+  </div>
+)
+*/

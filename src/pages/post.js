@@ -35,7 +35,7 @@ export function OnePost() {
   return (
     <>
       <div className="Post-container">
-        <AsideLeft />
+
         <div className="Mid-Post-container">
           <li style={{ borderBottom: "1px solid black" }}>
             <h4>by {firstName + " " + lastName}</h4>
@@ -71,7 +71,7 @@ export function OnePost() {
             ))}
           </ul>
         </div>
-        <AsideRight /> {/*Byt ut denna (?)*/}
+
       </div>
     </>
   );

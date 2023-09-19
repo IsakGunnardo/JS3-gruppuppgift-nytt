@@ -17,6 +17,8 @@ export function Main() {
   } else {
     return (
       <main className="main">
+            <Link to="/addnewpost" ><button className="add-btn">Create Post</button></Link>
+
         <ul></ul>
         <ul>
           {posting.map((holder, index) => (
