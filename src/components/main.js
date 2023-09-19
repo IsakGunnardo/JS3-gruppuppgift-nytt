@@ -27,11 +27,11 @@ export function Main() {
                 Creator: {users[index].firstName} {users[index].lastName}
               </h4>
               <img src={users[index].image} width={25} height={25} />
-              <Link
+            <Link
                 to={`/post/${holder.id}/${users[index].firstName}/${users[index].lastName}`}
               style={{color: "black"}} className="hover-link">
                 Read More
-              </Link>
+          </Link>
             </li>
           ))}
         </ul>

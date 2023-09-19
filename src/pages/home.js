@@ -7,11 +7,11 @@ import { Main } from "../components/main";
 import { useRecoilState } from "recoil";
 import { postState, userState, commentState } from "../states/atoms";
 
-export function Home(props) {
+export function Home({posts, users}) {
   return (
     <div className="Home-container">
       <AsideLeft />
-      <Main posts={props.posts} users={props.users} />
+      <Main posts={posts} users={users} />
       <AsideRight />
     </div>
   );

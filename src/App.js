@@ -1,7 +1,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import React from "react";
-
+import { Main } from "./components/main";
 import { Home } from "./pages/home";
 import { AddNewPost } from "./pages/addnewpost";
 import { OnePost } from "./pages/post";
@@ -36,10 +36,12 @@ function App() {
   return (
     <>
       <Navigator />
+
       <Routes>
         <Route path="/" element={<Home posts={posts} users={users} />} />
        <Route path="/addnewpost" element={<AddNewPost />} />
         <Route path="/post/:id/:firstName/:lastName" element={<OnePost />} />
+
       </Routes>
       <div className="content-container"></div>
       <button className="scroll-btn" onClick={scrollBackTop}>

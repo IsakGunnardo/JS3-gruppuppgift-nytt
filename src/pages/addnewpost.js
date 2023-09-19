@@ -6,31 +6,36 @@ import { fetchAPost } from "../api/fetch";
 
 //15/9 input och textarea funkar och sparar värdet i input. Det går att få informationen genom api:et ut i en console.log när man klickar på post knappen .
 // KVAR ATT GÖRA HÄR:
-// få user name och ev ID att sparas i inputstatet. 
-// rendera ut posten högst upp i main flödet genom att lägga in addNewPost i postState listan. 
+//få ut username och img med vare post på samma sätt som i main 
 //all styling 
 //knappfunktionalitet 
-export function AddNewPost(props) {
+export function AddNewPost() {
   const [users, setUser] = useRecoilState(userState);
   const [input, setInput] = useRecoilState(addNewPost);
   const [post, setPost] = useRecoilState(postState)
 
 const handleChange = (e) => {
   setInput({ ...input, [e.target.name]: e.target.value });
+  
 };
 
+// const userInformation = (()=> {})
+
 const handelClick= ()=> {
-  fetchAPost().then(console.log(input.title, input.text,3));
-  setInput({ title: "",text: ""}
-  )
+ fetchAPost( input.title, input.text, input.id ).then((input => setPost([input, ...post])))
+  console.log(post)
 }
 
 function PeopleList({ users }) {
   return (
-    
-      users.map((person, index) => (
-        <option value={person} key={index}>{person.firstName}</option>
-      ))
+    <select
+    name="id" 
+    value={input.id}
+    onChange={handleChange}>
+      {users.map((person) => (
+        <option key={person.id} value={person.id}>{person.firstName}</option>
+      ))}
+      </select>
    
   );
 }
@@ -39,11 +44,8 @@ function PeopleList({ users }) {
    <section className="add-post-section">
    
    <label htmlFor="usernames">Choose a user:</label>
-   <select
-    
-   >
-    <PeopleList users={users}/>
-    </select>
+   
+    <PeopleList users={users} />
      
       
      <input 
