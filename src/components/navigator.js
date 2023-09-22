@@ -1,105 +1,128 @@
-import React from 'react'
-import logo from './picture/reddit-logo-text.png'
-import style from './navigator.css';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import Modal from './modal';
-//import Form from './form';
+import React from "react";
+import logo from "./picture/reddit-logo-text.png";
+import style from "./navigator.css";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import Modal from "./modal";
+import styles from "./modal.css";
+import { MagnifyingGlass, GoogleLogo, AppleLogo } from "@phosphor-icons/react";
 
 function Navigator() {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   // ---------- for the modal -----------------------------------------------
-    const [signUp, setSignUp] = useState(false)
-    const [logIn,setLogIn] = useState(false)
+  const [signUp, setSignUp] = useState(false);
+  const [logIn, setLogIn] = useState(false);
 
-    const handelClickS = (() => {
-    if(signUp === false) {setSignUp(true)}
-    else {
-      setSignUp(false)
+  const handelClickS = () => {
+    if (signUp === false) {
+      setSignUp(true);
+    } else {
+      setSignUp(false);
     }
-    }) 
-  const handelClickL = (() => {
-    if(logIn === false) {setLogIn(true)}
-    else {
-      setLogIn(false)
+  };
+  const handelClickL = () => {
+    if (logIn === false) {
+      setLogIn(true);
+    } else {
+      setLogIn(false);
     }
-    })
+  };
 
-    const ChangeModal = (() => {
-       if(signUp === true) {
-         setLogIn(true)
-        setSignUp(false)}else { 
-          setLogIn(false)
-          setSignUp(true)
-
-        }
-    })
+  const ChangeModal = () => {
+    if (signUp === true) {
+      setLogIn(true);
+      setSignUp(false);
+    } else {
+      setLogIn(false);
+      setSignUp(true);
+    }
+  };
   // -----------------------------------------------------------------------------
   return (
-    <nav className='navigator'>
-      <img className="logo" src={logo} onClick={() => navigate('/')}/>
-      <input 
-      className="input"
-      placeholder='Search Reddit'
-      />
-      <button onClick={handelClickS}
-      className="sign-up-btn"
-      
-      >Sign up</button>
-      <Modal
-      open={signUp}
-      onClose={handelClickS}
-      btnMessage="X"
-      >
-        <div className='signup-form'>
-          <h3>Sign Up </h3>
-          <span>By continuing, you are setting
-             up a Reddit account and agree to our User
-              Agreement and Privacy Policy. </span>
-              <span><input type='checkbox'/> 
-              I agree to get emails about cool stuff on Reddit </span>
-              <div>Continue whit Google</div>
-              <div>Continue whit Apple</div>
-        <span>-------OR---------</span>
-        <input
-        placeholder='Email'/>
-        <button>Continue</button>
-        <span>Alredy a redditor? <button onClick={ChangeModal}>Log In</button></span>
-        </div>
-      </Modal>
-      <button onClick={handelClickL}
-      className="sign-up-btn"
-      >Log in</button>
-        <Modal
-       open={logIn}
-       onClose={handelClickL}
-       btnMessage="X">
-  <div className='login-form'>
-          <h3>Log In </h3>
-          <span>By continuing, you are setting
-             up a Reddit account and agree to our User 
-             Agreement and Privacy Policy. </span>
-              <span><input type='checkbox'/> 
-              I agree to get emails about cool stuff on Reddit </span>
-              <div>Continue whit Google</div>
-              <div>Continue whit Apple</div>
-        <span>-------OR---------</span>
-        <input
-        placeholder='Username'/>
-         <input
-        placeholder='Password'/>
-        <span>Forgot your username or password? </span>
-        <button>Continue</button>
-        <span>New to reddit? <button onClick={ChangeModal}>Sign Up</button></span>
-       
-        </div>
-       </Modal>
+    <nav className="navigator">
+      <img className="logo" src={logo} onClick={() => navigate("/")} />
+      <MagnifyingGlass size={20} className="MagnifyingGlass" />
+      <input className="input" placeholder="Search Reddit" />
 
+      <button onClick={handelClickS} className="sign-up-btn">
+        Sign up
+      </button>
+      <Modal open={signUp}>
+        <button onClick={handelClickS} className="modal-close-btn">
+          x
+        </button>
+        <h3 className="modal-h3">Sign Up </h3>
+        <span className="modal-text">
+          By continuing, you are setting up a Reddit account and agree to our
+          User Agreement and Privacy Policy.{" "}
+        </span>
+        <span className="modal-checkbox">
+          <input type="checkbox" />I agree to get emails about cool stuff on
+          Reddit{" "}
+        </span>
+        <div className="modal-btn1">
+          {" "}
+          <GoogleLogo
+            size={20}
+            color="#0000ff"
+            weight="bold"
+            className="modal-logo"
+          />
+          Continue whit Google
+        </div>
+        <div className="modal-btn1">
+          {" "}
+          <AppleLogo size={20} className="modal-logo" />
+          Continue whit Apple
+        </div>
+        <span className="modal-or">-----------------OR----------------</span>
+        <input className="modal-input" placeholder="Email" />
+        <button className="modal-btn1 modal-btn2">Continue</button>
+        <span className="modal-text2">
+          Alredy a redditor? <u onClick={ChangeModal}>Log In</u>
+        </span>
+      </Modal>
+      <button onClick={handelClickL} className="sign-up-btn">
+        Log in
+      </button>
+      <Modal open={logIn}>
+        <button onClick={handelClickL} className="modal-close-btn">
+          x
+        </button>
+        <h3 className="modal-h3">Log In </h3>
+        <span className="modal-text">
+          By continuing, you are setting up a Reddit account and agree to our
+          User Agreement and Privacy Policy.{" "}
+        </span>
+        <div className="modal-btn1">
+          {" "}
+          <GoogleLogo
+            size={20}
+            color="#0000ff"
+            weight="bold"
+            className="modal-logo"
+          />
+          Continue whit Google
+        </div>
+        <div className="modal-btn1">
+          {" "}
+          <AppleLogo size={20} className="modal-logo" />
+          Continue whit Apple
+        </div>
+        <span className="modal-or">-----------------OR----------------</span>
+        <input className="modal-input" placeholder="Username" />
+        <input className="modal-input" placeholder="Password" />
+        <span>
+          Forgot your <u>username</u> or <u>password?</u>{" "}
+        </span>
+        <button className="modal-btn1 modal-btn2">Continue</button>
+        <span className="modal-text2">
+          New to reddit? <u onClick={ChangeModal}>Sign Up</u>
+        </span>
+      </Modal>
     </nav>
-  )
+  );
 }
 
-export default Navigator
-
-
+export default Navigator;

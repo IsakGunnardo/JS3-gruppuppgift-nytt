@@ -30,10 +30,10 @@ body {
     height: 40px;
     border-radius: 20px;
     justify-content: center;
-
+    padding-left: 30px;
     background-color: rgba(234, 232, 232, 0.895);
     border: none;
-    margin-right: 10%;
+    margin-right: 12%;
 
 }
 
@@ -43,7 +43,7 @@ body {
     padding: 10px;
     margin-left: 1%;
 
-    background-color: rgba(252, 20, 20, 0.856);
+    background-color: #d93a00;
     color: white;
 }
 
@@ -52,16 +52,15 @@ body {
     background-color: rgba(192, 191, 191, 0.777);
 }
 /* modal */
-.signup-form {
-    background-color: rgb(245, 106, 106);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-
+.MagnifyingGlass {
+   margin-top: 12px;
+   margin-right: -25px;
+    z-index: 20;
+    position: relative;
+   
 }
-.login-form {
-    background-color:white;
+.modal-logo{
+    display: flex;
+  text-align: start;
+  position: absolute;
 }

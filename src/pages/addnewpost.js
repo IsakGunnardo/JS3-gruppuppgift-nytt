@@ -4,6 +4,7 @@ import style from "./pages.css";
 import { useRecoilState } from "recoil";
 import { addNewPost, userState, postState } from "../states/atoms";
 import { fetchAPost } from "../api/fetch";
+import { Article, ImageSquare, Link, TextStrikethrough, CodeSimple  } from "@phosphor-icons/react";
 
 //15/9 input och textarea funkar och sparar värdet i input. Det går att få informationen genom api:et ut i en console.log när man klickar på post knappen .
 // KVAR ATT GÖRA HÄR:
@@ -38,6 +39,7 @@ export function AddNewPost() {
   function PeopleList({ users }) {
     return (
       <select name="id" value={input.id} onChange={handleChange}>
+        <option>Choose a user:</option>
         {users.map((person) => (
           <option key={person.id} value={person.id}>
             {person.firstName} {" "}{person.lastName}
@@ -50,10 +52,14 @@ export function AddNewPost() {
     <>
       <section className="add-post-section">
         <div className="new-post-users">
-          <label htmlFor="usernames">Choose a user:</label>
-
+     
           <PeopleList users={users} />
         </div>
+        <div className="new-post-img-btn">
+          <button className="choose-post-btn"><Article size={25} />Post</button>
+          <button className="choose-post-btn"> <ImageSquare size={25} />Image & video</button>
+          <button className="choose-post-btn"><Link size={25} />Link</button>
+          <button className="choose-post-btn "><Article size={25} />Poll</button></div>
         <div className="new-post-title">
           <input
             placeholder="Title"
@@ -66,9 +72,9 @@ export function AddNewPost() {
         <div className="new-post-style-btn">
           <button>B</button>
           <button>i</button>
-          <button>Q</button>
-          <button>S</button>
-          <button>C</button>
+          <button><Link /></button>
+          <button><TextStrikethrough/></button>
+          <button><CodeSimple/></button>
           <span>markdown mode</span>
         </div>
         <div className="new-post-textarea">

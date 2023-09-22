@@ -1,6 +1,7 @@
 import React from 'react'
+import style from './modal.css'
 
-export default function Modal({ open, onClose, children, btnMessage}) {
+export default function Modal({ open, children, btnMessage}) {
   if (!open) return null;
   
   return (
@@ -9,9 +10,7 @@ export default function Modal({ open, onClose, children, btnMessage}) {
       <div className="modal-open">
         
         {children}
-        <button onClick={onClose} className="close-modal-btn boka-btn">
-          {btnMessage}
-        </button>
+     
       </div>
     </>
   );

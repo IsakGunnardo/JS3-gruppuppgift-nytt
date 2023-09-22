@@ -77,6 +77,19 @@ body{
     margin-bottom: 10px;
 
 }
+.new-post-users {
+
+    width: 100%; 
+    margin-bottom: 10px;
+    
+}
+.new-post-users :nth-child(1) {
+    background-color: white;
+    border: none;
+    padding: 10px;
+    width: 300px;
+
+}
 .new-post-title {
     padding: 10px; 
     border: 1px solid rgba(128, 128, 128, 0.335);
@@ -99,7 +112,7 @@ body{
     padding: 7px; 
     border: 1px solid rgba(128, 128, 128, 0.335);
     width: 100%;
-    margin-left: 60%;
+    margin-left: 50%;
 }
 .new-post-textarea {
     padding: 10px; 
@@ -133,4 +146,27 @@ body{
     padding: 10px; 
     border: 1px solid rgba(128, 128, 128, 0.335);
     width: 100%;
+}
+.new-post-img-btn {
+    padding: 10px; 
+    border: 1px solid rgba(128, 128, 128, 0.335);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.choose-post-btn {
+    padding: 10px; 
+    border: 1px solid rgba(128, 128, 128, 0.335);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.781);
+
+}
+.new-post-img-btn :nth-child(4):last-child {
+    color: rgba(0, 0, 0, 0.188);
+
 }
