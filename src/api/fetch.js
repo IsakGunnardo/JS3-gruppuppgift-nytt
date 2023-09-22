@@ -31,16 +31,19 @@ export async function getOnePosts({ id }) {
 }
 
 
- export async function fetchAPost(title, body, id ) {
+ export async function fetchAPost(title, body, id , firstName, lastName) {
 
   let result = await fetch("https://dummyjson.com/posts/add", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      Id: 151,
+      Id: id,
       title: title,
       body: body,
-      userId: id
+      userId: id,
+      firstName: firstName,
+      lastName: lastName
+      
     })
   });
   let json = await result.json();

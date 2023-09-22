@@ -51,3 +51,17 @@ body {
 .sign-up-btn:hover {
     background-color: rgba(192, 191, 191, 0.777);
 }
+/* modal */
+.signup-form {
+    background-color: rgb(245, 106, 106);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+
+}
+.login-form {
+    background-color:white;
+}

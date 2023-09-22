@@ -67,6 +67,11 @@ export function OnePost() {
                   User: {comment.user.username}
                 </h4>
                 <h5>Comment: {comment.body}</h5>
+                <div className="Reaction-container">
+              <button onClick={increase}>↑</button>
+              <span>{likes}</span>
+              <button onClick={decrease}>↓</button>
+            </div>
               </li>
             ))}
           </ul>

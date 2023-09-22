@@ -4,13 +4,20 @@ body{
 .Home-container, .Post-container{
     display: flex;
     flex-direction: row;
-    margin-right: 50px;
+    margin: 30px 10px 5px 0 ;
 
+    width: 200rem;
+    overflow: scroll;
    
 
 
     
 }
+.Post-container{
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
 
 .big-btn {
     display: block;
@@ -27,6 +34,9 @@ body{
 
 .Comment-container{
     border: 1px solid black;
+    list-style: none;
+    margin-right: 5%;
+    padding-left: 5%
 }
 
 .plus-icon{
@@ -38,7 +48,12 @@ body{
 .Reaction-container{
     margin-top: 20px;
 }
-
+.Reaction-container>button{
+    background-color: transparent;
+    font-size: large;
+    font-weight: bold;
+    border: none;
+}
 .Reaction-container > *{
     margin: 20px;
     width: 50px;

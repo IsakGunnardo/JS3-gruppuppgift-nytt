@@ -1,7 +1,8 @@
 import "./App.css";
 import "./components/aside.css";
-import { useEffect, useState } from "react";
 import React from "react";
+import { useEffect, useState } from "react";
+
 import { Main } from "./components/main";
 import { Home } from "./pages/home";
 import { AddNewPost } from "./pages/addnewpost";
@@ -9,7 +10,6 @@ import { OnePost } from "./pages/post";
 import { getAllPosts, getAllComments, getAllUsers } from "./api/fetch";
 import { AsideLeft } from "./components/asideleft";
 import { AsideRight } from "./components/asideright";
-
 
 import Navigator from "./components/navigator";
 import { Route, Routes, useLocation } from "react-router-dom";
@@ -38,35 +38,20 @@ function App() {
     getAllUsers().then((result) => setUsers(result.users));
   }, []);
 
-  <Home posts={posts} users={users} />;
-
-  
+   //<Home posts={posts} users={users} />;  denna överflödig?
 
   return (
     <>
       <Navigator />
       <div className="container-appjs">
-      {!isAddNewPostRoute && (
-        <>  
-          <AsideLeft />
-
-          <AsideRight />
-        </>
-      )}
-      <Routes>
-        
+      {!isAddNewPostRoute && ( <AsideLeft /> )}
+      <Routes>        
         <Route path="/" element={<Home posts={posts} users={users} />} />
         <Route path="/addnewpost" element={<AddNewPost />} />
         <Route path="/post/:id/:firstName/:lastName" element={<OnePost />} />
       </Routes>
-     
-      
-    
-      
-      
-      </div>
-
-      
+      {!isAddNewPostRoute && ( <AsideRight /> )}
+      </div>      
       <div className="content-container"></div>
       <button className="scroll-btn" onClick={scrollBackTop}>
         Back to top

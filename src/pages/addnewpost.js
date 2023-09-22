@@ -8,7 +8,7 @@ import { fetchAPost } from "../api/fetch";
 //15/9 input och textarea funkar och sparar värdet i input. Det går att få informationen genom api:et ut i en console.log när man klickar på post knappen .
 // KVAR ATT GÖRA HÄR:
 //få ut username och img med vare post på samma sätt som i main
-//all styling
+
 //knappfunktionalitet
 export function AddNewPost() {
   const [users, setUser] = useRecoilState(userState);
@@ -16,13 +16,20 @@ export function AddNewPost() {
   const [post, setPost] = useRecoilState(postState);
 
   const handleChange = (e) => {
+   
     setInput({ ...input, [e.target.name]: e.target.value });
+   
   };
 
+ /*const findFirstName = (() => {
+     const firstName = users.find(user => user.firstName === input.id)
+     return firstname
+    });
+ */ 
   // const userInformation = (()=> {})
 
   const handelClick = () => {
-    fetchAPost(input.title, input.text, input.id).then((input) =>
+    fetchAPost( input.title, input.text,input.id,  input.firstName, input.lastName).then((input) =>
       setPost([input, ...post])
     );
     console.log(post);
@@ -33,7 +40,7 @@ export function AddNewPost() {
       <select name="id" value={input.id} onChange={handleChange}>
         {users.map((person) => (
           <option key={person.id} value={person.id}>
-            {person.firstName}
+            {person.firstName} {" "}{person.lastName}
           </option>
         ))}
       </select>
