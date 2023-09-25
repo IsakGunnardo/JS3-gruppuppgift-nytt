@@ -1,4 +1,3 @@
-
 export async function getAllPosts() {
   try {
     let result = await fetch("https://dummyjson.com/posts");
@@ -30,9 +29,7 @@ export async function getOnePosts({ id }) {
   return json;
 }
 
-
- export async function fetchAPost(title, body, id , firstName, lastName) {
-
+export async function fetchAPost(title, body, id, firstName, lastName) {
   let result = await fetch("https://dummyjson.com/posts/add", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -42,16 +39,13 @@ export async function getOnePosts({ id }) {
       body: body,
       userId: id,
       firstName: firstName,
-      lastName: lastName
-      
-    })
+      lastName: lastName,
+    }),
   });
   let json = await result.json();
-    return json;
+  return json;
 }
 
-
-   
 /*
 import { useEffect, useState } from "react";
 //Försöka att skapa en 

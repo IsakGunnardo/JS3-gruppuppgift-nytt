@@ -1,15 +1,14 @@
 import { Link } from "react-router-dom";
 import "./main.css";
 import { RecoilRoot, useRecoilState } from "recoil";
-import { postState, userState } from "../states/atoms";
+import { userState, allDatasState } from "../states/atoms";
 import React from "react";
 
 export function Main() {
-
   const [users, setUser] = useRecoilState(userState);
-  const [posting, setPosting] = useRecoilState(postState);
+  const [allData, setAllData] = useRecoilState(allDatasState);
 
-  if (Object.keys(users).length === 0) {
+  if (Object.keys(allData).length === 0) {
     return (
       <div>
         <p>User data is not available.</p>
@@ -18,150 +17,51 @@ export function Main() {
   } else {
     return (
       <main className="main">
-            <Link to="/addnewpost" ><button style={{marginLeft:"2%"}}className="add-btn">Create Post</button></Link>
+        <Link to="/addnewpost">
+          <button style={{ marginLeft: "2%" }} className="add-btn">
+            Create Post
+          </button>
+        </Link>
 
         <ul></ul>
         <ul>
-          {posting.map((holder, index) => (
-            
-            <li key={index} style={{ borderBottom: "1px solid black" }}>
-              <h3>Title: {holder.title}</h3>
-              <main>{holder.body}</main>
+          {allData.map((holder, index) => {
+            let idIsInvalid = 0;
+            if (holder.id === 151) {
+              idIsInvalid = holder.userId;
+            } else {
+              idIsInvalid = holder.id;
+            }
+            return (
+              //kan vara bra att importera UUID - för att skapa unika keys (nu får ingen body se likadan ut)
+              <li key={holder.body} style={{ borderBottom: "1px solid black" }}>
+                <h3>Title: {holder.title}</h3>
+                <main>{holder.body}</main>
 
+                {holder && <img src={holder.image} width={25} height={25} />}
 
-              {users[index] &&  (
-                <img src={users[holder.id]?.image} width={25} height={25} />
-              )}              
-              
-              <h4>
-                Creator: {users[holder.id]?.firstName} {users[holder.id]?.lastName}
-              </h4>                          
-            
-              <Link 
-                to={`/post/${holder.id}/${users[holder.id]?.firstName}/${users[holder.id]?.lastName}`}
-                style={{color: "black"}} className="hover-link">
-                Read More
-            </Link>
+                <h4>
+                  Creator: {holder.firstName} {holder.lastName}
+                </h4>
+                <h5>
+                  Tags:{" "}
+                  {Array.isArray(allData[index]?.tags)
+                    ? allData[index].tags.map((tag) => tag + " / ")
+                    : "No tags "}
+                </h5>
 
-            </li>
-          ))}
+                <Link
+                  to={`/post/${holder.id}/${allData[index]?.firstName}/${allData[index]?.lastName}/${index}`}
+                  style={{ color: "black" }}
+                  className="hover-link"
+                >
+                  Read More
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </main>
     );
   }
 }
-
-
-/* ORIGINALET
-
-import { Link } from "react-router-dom";
-import "./main.css";
-import { RecoilRoot, useRecoilState } from "recoil";
-import { postState, userState } from "../states/atoms";
-import React from "react";
-
-export function Main() {
-
-  const [users, setUser] = useRecoilState(userState);
-  const [posting, setPosting] = useRecoilState(postState);
-
-  if (Object.keys(users).length === 0) {
-    return (
-      <div>
-        <p>User data is not available.</p>
-      </div>
-    );
-  } else {
-    return (
-      <main className="main">
-            <Link to="/addnewpost" ><button style={{marginLeft:"2%"}}className="add-btn">Create Post</button></Link>
-
-        <ul></ul>
-        <ul>
-          {posting.map((holder, index) => (
-            <li key={index} style={{ borderBottom: "1px solid black" }}>
-              <h3>Title: {holder.title}</h3>
-              <main>{holder.body}</main>
-              <h4>
-                Creator: {users[index].firstName} {users[index].lastName}
-              </h4>
-              <img src={users[index].image} width={25} height={25} />
-            <Link
-                to={`/post/${holder.id}/${users[index].firstName}/${users[index].lastName}`}
-              style={{color: "black"}} className="hover-link">
-                Read More
-          </Link>
-            </li>
-          ))}
-        </ul>
-      </main>
-    );
-  }
-}
-
-*/
-
-
-
-
-
-
-
-/* TEST varianten
-
-import { Link } from "react-router-dom";
-import "./main.css";
-import { RecoilRoot, useRecoilState } from "recoil";
-import { postState, userState } from "../states/atoms";
-import React from "react";
-
-export function Main() {
-
-  const [users, setUser] = useRecoilState(userState);
-  const [posting, setPosting] = useRecoilState(postState);
-
-  if (Object.keys(users).length === 0) {
-    return (
-      <div>
-        <p>User data is not available.</p>
-      </div>
-    );
-  } else {
-    return (
-      <main className="main">
-            <Link to="/addnewpost" ><button style={{marginLeft:"2%"}}className="add-btn">Create Post</button></Link>
-
-        <ul></ul>
-        <ul>
-          {posting.map((holder, index) => (
-            <li key={index} style={{ borderBottom: "1px solid black" }}>
-              <h3>Title: {holder.title}</h3>
-              <main>{holder.body}</main>
-
-
-              {users[index] &&  (
-                <img src={users[index]?.image} width={25} height={25} />
-              )}              
-              
-              <h4>
-                Creator: {users[index]?.firstName} {users[index]?.lastName}
-              </h4>                          
-            
-              <Link 
-                to={`/post/${holder.id}/${users[index]?.firstName}/${users[index]?.lastName}`}
-                style={{color: "black"}} className="hover-link">
-                Read More
-            </Link>
-
-            </li>
-          ))}
-        </ul>
-      </main>
-    );
-  }
-}
-
-
-
-
-*/
