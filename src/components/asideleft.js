@@ -66,7 +66,7 @@ export function AsideLeft() {
             Business <i className="arrow down" />
             <ul
               className="sidebar-ul-toggle"
-              style={{ display: toggleSport ? "none" : "block" }}
+              style={{ display: toggleBusiness ? "none" : "block" }}
             >
               <li>GameStop</li>
               <li>blabla</li>
