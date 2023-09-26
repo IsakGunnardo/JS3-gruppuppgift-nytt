@@ -46,7 +46,38 @@ export async function fetchAPost(title, body, id, firstName, lastName) {
   return json;
 }
 
+export async function addAComment(id, body, name) {
+  let result = await fetch("https://dummyjson.com/comments/add", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      id:id,
+      body: body,     
+      user: name
+     
+    }),
+  });
+  let json = await result.json();
+  return json;
+}
 /*
+
+fetch('https://dummyjson.com/comments/add', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    body: 'This makes all sense to me!',
+    postId: 3,
+    userId: 5,
+    username: 
+  })
+})
+.then(res => res.json())
+.then(console.log);
+            
+
+
+
 import { useEffect, useState } from "react";
 //Försöka att skapa en 
 export function getAllComments({comments}) {

@@ -28,3 +28,4 @@ export const allDatasState = atom({
   key: "allData",
   default: [],
 });
+

@@ -1,7 +1,7 @@
 import React from 'react'
 import style from './modal.css'
 
-export default function Modal({ open, children, btnMessage}) {
+export default function Modal({ open, children}) {
   if (!open) return null;
   
   return (

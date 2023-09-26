@@ -12,9 +12,6 @@ import {
   CodeSimple,
 } from "@phosphor-icons/react";
 
-//15/9 input och textarea funkar och sparar värdet i input. Det går att få informationen genom api:et ut i en console.log när man klickar på post knappen .
-// KVAR ATT GÖRA HÄR:
-//få ut username och img med vare post på samma sätt som i main
 
 //knappfunktionalitet
 export function AddNewPost() {

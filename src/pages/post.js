@@ -5,15 +5,17 @@ import { getAllComments } from "../api/fetch";
 import { AsideLeft } from "../components/asideleft";
 import { AsideRight } from "../components/asideright";
 import { RecoilRoot, useRecoilState } from "recoil";
-import { postState, allDatasState } from "../states/atoms";
+import { postState, allDatasState, commentState } from "../states/atoms";
 import "./pages.css";
+import {AddComment} from '../components/commetsAdd'
 
 // kvar o göra är att fixa så reaktionerna uppdateras i allData
 //Fetchar en post om det inte är en egenskapad "post", och visar sedan en single post
 export function OnePost() {
   const { id, firstName, lastName, index } = useParams();
   const [onePost, setOnePost] = useState({});
-  const [allComments, setAllComments] = useState([]);
+  const [allComments, setAllComments] = useRecoilState(commentState);
+  /* const [allComments, setAllComments] = useState([]); */
   const [likes, setLikes] = useState(0);
   const [allData, setAllData] = useRecoilState(allDatasState);
 
@@ -23,8 +25,9 @@ export function OnePost() {
     }
   }, [id]);
 
-  useEffect(() => {
-    getAllComments().then((result) => setAllComments(result.comments));
+   useEffect(() => {
+    getAllComments().then((result) => setAllComments(result.comments)); 
+    
   }, []);
 
   useEffect(() => {
@@ -40,7 +43,7 @@ export function OnePost() {
   const decrease = () => {
     setLikes((like) => like - 1);
   };
-
+ 
   if (id == 151) {
     return (
       <>
@@ -64,17 +67,13 @@ export function OnePost() {
                   : "No tags available"}
               </h4>
             </li>
-            <button className="big-btn">
-              <span>
-                <span className="plus-icon">+</span>
-                <span>Add a comment</span>
-              </span>
-            </button>
+           
+            <AddComment/>
             <ul>
               {allComments.map((comment, index) => (
                 <li key={index} className="Comment-container">
                   <h4 style={{ fontWeight: "1200", fontSize: "larger" }}>
-                    User: {comment.user.username}
+                  User: {comment.user?.username}                     
                   </h4>
                   <h5>Comment: {comment.body}</h5>
                   <div className="Reaction-container">
@@ -111,19 +110,15 @@ export function OnePost() {
                   : "No tags available"}
               </h4>
             </li>
-            <button className="big-btn">
-              <span>
-                <span className="plus-icon">+</span>
-                <span>Add a comment</span>
-              </span>
-            </button>
+         
+            <AddComment/>
             <ul>
               {allComments.map((comment, index) => (
                 <li key={index} className="Comment-container">
                   <h4 style={{ fontWeight: "1200", fontSize: "larger" }}>
-                    User: {comment.user.username}
+                  User: {comment && comment.user?.username}
                   </h4>
-                  <h5>Comment: {comment.body}</h5>
+                  <h5>Comment: {comment && comment.body}</h5>
                   <div className="Reaction-container">
                     <button onClick={increase}>↑</button>
                     <span>{likes}</span>
@@ -138,3 +133,6 @@ export function OnePost() {
     );
   }
 }
+
+//ändrat 121  <h5>Comment: {comment.body}</h5>
+// rad 76 ligger en "?"

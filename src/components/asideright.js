@@ -26,18 +26,11 @@ export function AsideRight() {
           </ul>
           <button className="aside-right-btn">See more</button>
         </div>
-        <ul>
-            <li>
-              <Link to="/">Home</Link>              
-            </li>
-            <li>
-            <Link to="/post">Post</Link>
-            </li>
-            <li>
-            <Link to="/addnewpost">Add Post</Link>
-            </li>           
-          </ul>
+       
       </aside>
     </>
   );
 }
+
+
+// <Link to="/post">Post</Link>

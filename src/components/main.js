@@ -17,12 +17,32 @@ export function Main() {
   } else {
     return (
       <main className="main">
-        <Link to="/addnewpost">
-          <button style={{ marginLeft: "2%" }} className="add-btn">
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <Link to="/addnewpost">
+            <input
+              placeholder="Create Post"
+              style={{ marginLeft: "5%" }}
+              className="add-btn"
+            />
+            {/* <button style={{ marginLeft: "2%" }} className="add-btn">
             Create Post
-          </button>
-        </Link>
-
+          </button> */}
+          </Link>
+          <div style={{display: "flex", gap: "2rem", marginRight: "5px"}}>
+            <span className="btn-right">
+              <p>Hot</p>
+              <i className="arrow down"></i>
+            </span>
+            <span className="btn-right">
+              <p>Sweden</p>
+              <i className="arrow down"></i>
+            </span>
+            <span className="btn-right">
+              <p>gridbild</p>
+              <i className="arrow down"></i>
+            </span>
+          </div>
+        </div>
         <ul></ul>
         <ul>
           {allData.map((holder, index) => {
@@ -33,8 +53,11 @@ export function Main() {
               idIsInvalid = holder.id;
             }
             return (
-              //kan vara bra att importera UUID - för att skapa unika keys (nu får ingen body se likadan ut)
-              <li key={holder.body} style={{ borderBottom: "1px solid black" }}>
+              //kan vara bra att importera UUID - för att skapa unika keys (nu får ingen body se likadan ut) // nu funkar det, lösning key{math.random()} så det blir unika nycklar för postsen
+              <li
+                key={Math.random()}
+                style={{ borderBottom: "1px solid black" }}
+              >
                 <h3>Title: {holder.title}</h3>
                 <main>{holder.body}</main>
 

@@ -1,3 +1,73 @@
+
+import { commentState } from '../states/atoms';
+import {useRecoilState} from 'recoil'
+import { addAComment } from '../api/fetch';
+import {useState} from 'react'
+
+
+export function AddComment(){
+  const [allComments, setAllComments] = useRecoilState(commentState);
+  const [input, setInput] = useState({user: "", body:""})
+
+  const handelChange = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });  
+    
+  
+  }
+   const randomId= Math.random()
+  const handelClick= (e) => {
+    e.preventDefault()
+    
+    addAComment(randomId, input.body ,input.user).then((input) =>
+    setAllComments([input, ...allComments])
+    
+  );
+   console.log(allComments)
+
+  }
+  
+  return (
+    <div>      
+      <input
+            placeholder="Username"
+            name="user"
+            value={input.user}
+            onChange={handelChange}
+          />
+          <textarea
+          className='comment-container'
+          name='body'
+          value={input.body}
+          onChange={handelChange}
+          />
+          <button 
+            className='comment-btn'
+            onClick={handelClick}>
+            Add a Comment
+          </button>
+    </div>
+  )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 import { userState } from '../states/atoms';
 import {useRecoilState} from 'recoil';
 import { useState } from 'react';
@@ -79,3 +149,5 @@ export function AddPost() {
     </section>
   )
 }
+
+*/

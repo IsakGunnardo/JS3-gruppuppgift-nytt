@@ -48,9 +48,16 @@
 
     display: none;
 }
-
+.sidebar-ul-toggle-sport{
+    display: none;
+}
 .ul-in-ul{
     border: none;
+    display: flex;
+    gap: 15px;
+    flex-Direction: column;
+
+    
 
 }
 .arrow:checked{

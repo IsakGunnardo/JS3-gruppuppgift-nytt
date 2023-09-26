@@ -69,12 +69,12 @@ function Navigator() {
             weight="bold"
             className="modal-logo"
           />
-          Continue whit Google
+          Continue with Google
         </div>
         <div className="modal-btn1">
           {" "}
           <AppleLogo size={20} className="modal-logo" />
-          Continue whit Apple
+          Continue with Apple
         </div>
         <span className="modal-or">-----------------OR----------------</span>
         <input className="modal-input" placeholder="Email" />
@@ -103,12 +103,12 @@ function Navigator() {
             weight="bold"
             className="modal-logo"
           />
-          Continue whit Google
+          Continue with Google
         </div>
         <div className="modal-btn1">
           {" "}
           <AppleLogo size={20} className="modal-logo" />
-          Continue whit Apple
+          Continue with Apple
         </div>
         <span className="modal-or">-----------------OR----------------</span>
         <input className="modal-input" placeholder="Username" />
