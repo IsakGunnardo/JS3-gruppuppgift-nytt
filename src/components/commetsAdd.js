@@ -1,78 +1,54 @@
-
-import { commentState } from '../states/atoms';
-import {useRecoilState} from 'recoil'
-import { addAComment } from '../api/fetch';
-import {useState} from 'react'
+import { commentState, userState } from "../states/atoms";
+import { useRecoilState } from "recoil";
+import { addAComment } from "../api/fetch";
+import { useState } from "react";
 
 //eftersom att det redan är förbestämt i API:ett vilka users som finns går det inte att skapa nya users som
-// jag förtår det utan man får göra som i post och rendera ut dom användare som finns och välja i listan. 
-export function AddComment(){
+// jag förtår det utan man får göra som i post och rendera ut dom användare som finns och välja i listan.
+export function AddComment() {
   const [allComments, setAllComments] = useRecoilState(commentState);
-  const [input, setInput] = useState({user: "", id: "", body:""})
+  const [users, setUsers] = useRecoilState(userState);
+  const [input, setInput] = useState({ user: "", id: "", body: "" });
 
   const handelChange = (e) => {
-    setInput({ ...input, [e.target.name]: e.target.value });  
-    
-  
-  }
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
   function PeopleList() {
     return (
       <select name="id" value={input.id} onChange={handelChange}>
         <option>Choose a user:</option>
-        {allComments.map((person) => (
-          <option key={Math.random()} value={person.user.id}>
-            {person.user.username}
+        {users.map((person) => (
+          <option key={Math.random()} value={person.id}>
+            {person.username}
           </option>
         ))}
       </select>
     );
   }
-  const handelClick= (e) => {
-    e.preventDefault()
-    
-    addAComment( input.body, input.user, input.id).then((input) =>
-    setAllComments([input, ...allComments])
-    
-  );
-  setInput(()=>({body:""}))
-  }
-  
+  const handelClick = (e) => {
+    e.preventDefault();
+
+    addAComment(input.body, input.user, input.id).then((input) =>
+      setAllComments([input, ...allComments])
+    );
+    setInput(() => ({ body: "" }));
+  };
+
   return (
-    <div>      
-   
-          <PeopleList/>
-          <textarea
-          className='comment-container'
-          name='body'
-          value={input.body}
-          onChange={handelChange}
-          />
-          <button 
-            className='comment-btn'
-            onClick={handelClick}>
-            Add a Comment
-          </button>
+    <div>
+      <PeopleList />
+      <textarea
+        className="comment-container"
+        name="body"
+        value={input.body}
+        onChange={handelChange}
+      />
+      <button className="comment-btn" onClick={handelClick}>
+        Add a Comment
+      </button>
     </div>
-  )
+  );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*
 import { userState } from '../states/atoms';
