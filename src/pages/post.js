@@ -8,6 +8,7 @@ import { RecoilRoot, useRecoilState } from "recoil";
 import { postState, allDatasState, commentState } from "../states/atoms";
 import "./pages.css";
 import {AddComment} from '../components/commetsAdd'
+import { ArrowFatDown, ArrowFatUp } from "@phosphor-icons/react";
 
 // kvar o göra är att fixa så reaktionerna uppdateras i allData
 //Fetchar en post om det inte är en egenskapad "post", och visar sedan en single post
@@ -17,6 +18,7 @@ export function OnePost() {
   const [allComments, setAllComments] = useRecoilState(commentState);
   /* const [allComments, setAllComments] = useState([]); */
   const [likes, setLikes] = useState(0);
+  const [likeComment, setLikeComment] = useState(4);
   const [allData, setAllData] = useRecoilState(allDatasState);
 
   useEffect(() => {
@@ -43,6 +45,14 @@ export function OnePost() {
   const decrease = () => {
     setLikes((like) => like - 1);
   };
+  
+  const increaseComment = () => {
+    setLikeComment((like) => like + 1);
+  };
+
+  const decreaseComment = () => {
+    setLikeComment((like) => like - 1);
+  }; 
  
   if (id == 151) {
     return (
@@ -56,9 +66,9 @@ export function OnePost() {
               <main>Body: {allData[index]?.body}</main>
 
               <div className="Reaction-container">
-                <button onClick={increase}>↑</button>
+                <button onClick={increase}><ArrowFatUp size={30}/></button>
                 <span>{likes}</span>
-                <button onClick={decrease}>↓</button>
+                <button onClick={decrease}><ArrowFatDown size={30}/></button>
               </div>
               <h4>
                 Tags:{" "}
@@ -77,9 +87,9 @@ export function OnePost() {
                   </h4>
                   <h5>Comment: {comment.body}</h5>
                   <div className="Reaction-container">
-                    <button onClick={increase}>↑</button>
-                    <span>{likes}</span>
-                    <button onClick={decrease}>↓</button>
+                  <button onClick={increaseComment}><ArrowFatUp size={25}/></button>
+                    <span>{likeComment}</span>
+                    <button onClick={decreaseComment}><ArrowFatDown size={25}/></button>
                   </div>
                 </li>
               ))}
@@ -99,9 +109,9 @@ export function OnePost() {
               <main>{onePost.body}</main>
 
               <div className="Reaction-container">
-                <button onClick={increase}>↑</button>
+                <button onClick={increase}><ArrowFatUp size={30}/></button>
                 <span>{likes}</span>
-                <button onClick={decrease}>↓</button>
+                <button onClick={decrease}><ArrowFatDown size={30}/></button>
               </div>
               <h4>
                 Tags:{" "}
@@ -120,9 +130,9 @@ export function OnePost() {
                   </h4>
                   <h5>Comment: {comment && comment.body}</h5>
                   <div className="Reaction-container">
-                    <button onClick={increase}>↑</button>
-                    <span>{likes}</span>
-                    <button onClick={decrease}>↓</button>
+                    <button onClick={increaseComment}><ArrowFatUp size={25}/></button>
+                    <span>{likeComment}</span>
+                    <button onClick={decreaseComment}><ArrowFatDown size={25}/></button>
                   </div>
                 </li>
               ))}
