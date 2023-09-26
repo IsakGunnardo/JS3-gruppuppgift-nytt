@@ -4,36 +4,43 @@ import {useRecoilState} from 'recoil'
 import { addAComment } from '../api/fetch';
 import {useState} from 'react'
 
-
+//eftersom att det redan är förbestämt i API:ett vilka users som finns går det inte att skapa nya users som
+// jag förtår det utan man får göra som i post och rendera ut dom användare som finns och välja i listan. 
 export function AddComment(){
   const [allComments, setAllComments] = useRecoilState(commentState);
-  const [input, setInput] = useState({user: "", body:""})
+  const [input, setInput] = useState({user: "", id: "", body:""})
 
   const handelChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });  
     
   
   }
-   const randomId= Math.random()
+  function PeopleList() {
+    return (
+      <select name="id" value={input.id} onChange={handelChange}>
+        <option>Choose a user:</option>
+        {allComments.map((person) => (
+          <option key={Math.random()} value={person.user.id}>
+            {person.user.username}
+          </option>
+        ))}
+      </select>
+    );
+  }
   const handelClick= (e) => {
     e.preventDefault()
     
-    addAComment(randomId, input.body ,input.user).then((input) =>
+    addAComment( input.body, input.user, input.id).then((input) =>
     setAllComments([input, ...allComments])
     
   );
-   console.log(allComments)
-
+  setInput(()=>({body:""}))
   }
   
   return (
     <div>      
-      <input
-            placeholder="Username"
-            name="user"
-            value={input.user}
-            onChange={handelChange}
-          />
+   
+          <PeopleList/>
           <textarea
           className='comment-container'
           name='body'

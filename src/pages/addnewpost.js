@@ -21,6 +21,7 @@ export function AddNewPost() {
 
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
+   
   };
 
   //Denna hittar firstname,lastname samt image --> läggs till i input objekt
@@ -52,6 +53,7 @@ export function AddNewPost() {
       .then((newInput) => {
         setAllData([newInput, ...allData]);
       });
+      
   };
 
   //denna tar enbart id till input

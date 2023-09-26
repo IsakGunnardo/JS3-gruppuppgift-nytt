@@ -40,21 +40,23 @@ export async function fetchAPost(title, body, id, firstName, lastName) {
       userId: id,
       firstName: firstName,
       lastName: lastName,
+     
     }),
   });
   let json = await result.json();
   return json;
 }
 
-export async function addAComment(id, body, name) {
+export async function addAComment( body, name, id) {
   let result = await fetch("https://dummyjson.com/comments/add", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      id:id,
+      id: 151,
       body: body,     
-      user: name
-     
+      postId: 62,
+      userId: id,
+      userUsername: name,
     }),
   });
   let json = await result.json();
