@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import style from "./pages.css";
-
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { addNewPost, userState, allDatasState } from "../states/atoms";
-import { fetchAPost } from "../api/fetch";
+import { createANewPost } from "../api/fetch";
 import {
   Article,
   ImageSquare,
@@ -15,7 +15,7 @@ import {
 
 //knappfunktionalitet
 export function AddNewPost() {
-  const [users, setUser] = useRecoilState(userState);
+ const [users, setUser] = useRecoilState(userState);
   const [input, setInput] = useRecoilState(addNewPost);
   const [allData, setAllData] = useRecoilState(allDatasState);
 
@@ -32,9 +32,18 @@ export function AddNewPost() {
     return [firstName, lastName, img];
   };
 
+  const navigate = useNavigate()
+ 
   //Postar samt fetchar AddPost via dummy, lägger sedan till det som saknas via findFirstName funktionen
-  const handelClick = () => {
-    fetchAPost(
+  const handelClick = (e) => {
+    e.preventDefault();
+    
+    if (input.text.trim() === "") {
+      alert("You have to put down some text");
+      return;
+    }
+
+    createANewPost(
       input.title,
       input.text,
       input.id,
@@ -53,9 +62,13 @@ export function AddNewPost() {
       .then((newInput) => {
         setAllData([newInput, ...allData]);
       });
-      
-  };
+      setInput({
+        title:"",
+        text: ""
 
+      })
+      navigate("/")
+  };
   //denna tar enbart id till input
   function PeopleList({ users }) {
     return (
@@ -69,10 +82,6 @@ export function AddNewPost() {
       </select>
     );
   }
-
-  useEffect(() => {
-    console.log(allData);
-  }, [allData]);
 
   return (
     <>
@@ -123,6 +132,7 @@ export function AddNewPost() {
         </div>
         <div className="new-post-textarea">
           <textarea
+            
             placeholder="Text(optional) Max 60 tecken"
             name="text"
             value={input.text}

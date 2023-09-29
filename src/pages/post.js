@@ -16,10 +16,17 @@ export function OnePost() {
   const { id, firstName, lastName, index } = useParams();
   const [onePost, setOnePost] = useState({});
   const [allComments, setAllComments] = useRecoilState(commentState);
+  const [likeCommentBoolean,setLikeCommentBoolean] = useState(false);
   /* const [allComments, setAllComments] = useState([]); */
   const [likes, setLikes] = useState(0);
   const [likeComment, setLikeComment] = useState(4);
+  const [likeBoolean,setLikeBoolean] = useState(false);
   const [allData, setAllData] = useRecoilState(allDatasState);
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handelClick = () => {
+    setIsClicked(true)
+  }
 
   useEffect(() => {
     if (id != 151) {
@@ -39,19 +46,45 @@ export function OnePost() {
   }, [onePost]);
 
   const increase = () => {
-    setLikes((like) => like + 1);
+    if(likeBoolean == false){ 
+      setLikes((like) => like + 1)
+      setLikeBoolean(!likeBoolean)
+  } else {
+    setLikes((like) => like - 1)
+    setLikeBoolean(!likeBoolean)
+  }
+   
   };
 
   const decrease = () => {
-    setLikes((like) => like - 1);
+    if(likeBoolean == false){ 
+      setLikes((like) => like - 1)
+      setLikeBoolean(!likeBoolean)
+  } else {
+    setLikes((like) => like + 1)
+    setLikeBoolean(!likeBoolean)
+  }
+   
   };
   
   const increaseComment = () => {
-    setLikeComment((like) => like + 1);
+    if(likeCommentBoolean == false){ 
+      setLikeComment((like) => like + 1)
+      setLikeCommentBoolean(!likeCommentBoolean)
+  } else {
+    setLikeComment((like) => like - 1)
+    setLikeCommentBoolean(!likeCommentBoolean)
+  }
   };
 
   const decreaseComment = () => {
-    setLikeComment((like) => like - 1);
+    if(likeCommentBoolean == false){ 
+      setLikeComment((like) => like - 1)
+      setLikeCommentBoolean(!likeCommentBoolean)
+  } else {
+    setLikeComment((like) => like + 1)
+    setLikeCommentBoolean(!likeCommentBoolean)
+  }
   }; 
  
   if (id == 151) {
@@ -109,9 +142,23 @@ export function OnePost() {
               <main>{onePost.body}</main>
 
               <div className="Reaction-container">
-                <button onClick={increase}><ArrowFatUp size={30}/></button>
+                <button className={`like-btn-positive ${isClicked ? 'grow-btn' : ''}`} 
+                  onClick={() => {
+                    increase();
+                    handelClick();
+                  }}
+                >                  
+                  <ArrowFatUp size={30} style={{color: "green"}}/>                  
+                </button>
                 <span>{likes}</span>
-                <button onClick={decrease}><ArrowFatDown size={30}/></button>
+                <button className={`like-btn-negative ${isClicked ? 'grow-btn' : ''}`} 
+                  onClick={() => {
+                    decrease();
+                    handelClick();
+                  }}                  
+                >
+                  <ArrowFatDown size={30} style={{color: "red"}}/>                
+                </button>
               </div>
               <h4>
                 Tags:{" "}

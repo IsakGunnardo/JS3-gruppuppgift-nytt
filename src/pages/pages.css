@@ -13,6 +13,7 @@ body{
 .Post-container{
     margin-left: 30px;
     margin-right: 30px;
+
 }
 
 
@@ -165,4 +166,19 @@ body{
 
 .new-post-img-btn :nth-child(4):last-child {
     color: rgba(0, 0, 0, 0.188);
+}
+
+.like-btn-positive,
+.like-btn-positive {
+    padding: 10px 20px;
+    font-size: 16px;
+    transition: transform 0.2s;
+}
+
+.like-btn-positive.grow-btn {
+    transform: scale(1.1);
+}
+
+.like-btn-negative.grow-btn {
+    transform: scale(1.1);
 }

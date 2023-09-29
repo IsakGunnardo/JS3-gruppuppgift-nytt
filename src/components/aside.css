@@ -1,11 +1,11 @@
-
-.sidebar-left{
+.sidebar-left {
     display: flex;
     flex-direction: column;
+
     width: 60%;
     height: 100vh;
     border-right: 1px solid black;
-   
+
     background-color: #ffffff;
     top: 63px;
     left: 0;
@@ -13,80 +13,80 @@
 
 }
 
+.sidebar-left h5{
+    margin-left: 20px;
+}
 
-.sidebar-left>section{
+.sidebar-left>section {
     margin-left: 2rem
 }
 
-.sidebar-left-ul, .sidebar-ul-toggle{
+
+.sidebar-ul-toggle {
     list-style: none;
     display: flex;
     flex-direction: column;
     gap: 15px;
-    border-bottom: 1px solid black;
+
     padding: 10%;
-;
+    ;
 
 }
 
-.sidebar-left-ul:hover{
+.sidebar-left-ul:hover {}
 
-}
-
-.sidebar-left-button{
+.sidebar-left-button {
     width: 80px;
     height: 40px;
     border: none;
     background-color: transparent;
 }
 
-.sidebar-left-p{
+.sidebar-left-p {
     font-size: 11px;
 }
 
-.sidebar-ul-toggle{
+.sidebar-ul-toggle {
 
     display: none;
 }
-.sidebar-ul-toggle-sport{
-    display: none;
-}
-.ul-in-ul{
+
+
+.ul-in-ul {
     border: none;
     display: flex;
     gap: 15px;
     flex-Direction: column;
 
-    
+
 
 }
-.arrow:checked{
 
-
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
     display: inline-block;
     padding: 3px;
   }
 
-  .down {
+.down {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
+}
+
+.up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
   }
 
-  
-.down:checked{
-    transform: rotate(260deg);
-    -webkit-transform: rotate(260deg);
 
-}
-.checkbox{
-    border: none;
-    background-color: transparent;
-}
+
+
 /*Högra sidebaren */
 /*Högra sidebaren */
 /*Högra sidebaren */
 
-.sidebar-right{
+.sidebar-right {
 
     right: 0px;
     top: 100px;
@@ -94,13 +94,13 @@
     height: 100vh;
     border-left: 1px solid black;
     background-color: #ffffff;
-    
 
-  
+
+
 
 }
 
-.sidebar-right-h2{
+.sidebar-right-h2 {
     font-size: 1rem;
     line-height: 1rem;
     font-weight: 600;
@@ -108,7 +108,7 @@
 
 
 
-.container-appjs{
+.container-appjs {
     display: flex;
 
 }

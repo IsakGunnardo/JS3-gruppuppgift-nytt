@@ -21,6 +21,8 @@ export const addNewPost = atom({
     lastName: "",
     image: "",
     reactions: 0,
+    title: "",
+    text: ""
   },
 });
 

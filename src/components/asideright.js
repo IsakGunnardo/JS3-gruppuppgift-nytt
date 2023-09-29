@@ -1,5 +1,5 @@
 import "./aside.css";
-import { Link } from "react-router-dom";
+
 
 export function AsideRight() {
   return (
@@ -32,5 +32,3 @@ export function AsideRight() {
   );
 }
 
-
-// <Link to="/post">Post</Link>

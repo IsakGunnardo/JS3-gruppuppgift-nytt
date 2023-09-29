@@ -3,11 +3,29 @@ import logo from "./picture/reddit-logo-text.png";
 import style from "./navigator.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useRecoilState } from "recoil";
 import Modal from "./modal";
 import styles from "./modal.css";
 import { MagnifyingGlass, GoogleLogo, AppleLogo } from "@phosphor-icons/react";
+import { postState } from "../states/atoms";
+
 
 function Navigator() {
+const [searchBar,setSearchBar] = useState("");
+const [getThePost, setThePost] = useRecoilState(postState)
+
+
+
+// ------ for the search bar ------------
+/* 
+const FilterItem = (search, item)=> {
+
+  return item.Filter(post => post.title.includes(search))
+
+ } 
+ const getFilterItems = FilterItem(searchBar, getThePost);
+ */
+
   const navigate = useNavigate();
 
   // ---------- for the modal -----------------------------------------------
@@ -38,12 +56,12 @@ function Navigator() {
       setSignUp(true);
     }
   };
-  // -----------------------------------------------------------------------------
+ // 
   return (
     <nav className="navigator">
       <img className="logo" src={logo} onClick={() => navigate("/")} />
       <MagnifyingGlass size={20} className="MagnifyingGlass" />
-      <input className="input" placeholder="Search Reddit" />
+      <input className="input" placeholder="Search Reddit" onChange={(e) => setSearchBar(e.target.value)}/>
 
       <button onClick={handelClickS} className="sign-up-btn">
         Sign up
