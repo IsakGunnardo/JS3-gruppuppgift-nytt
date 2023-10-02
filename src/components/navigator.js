@@ -6,25 +6,28 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import Modal from "./modal";
 import styles from "./modal.css";
-import { MagnifyingGlass, GoogleLogo, AppleLogo } from "@phosphor-icons/react";
-import { postState } from "../states/atoms";
+import { MagnifyingGlass, GoogleLogo, AppleLogo, KeyReturn } from "@phosphor-icons/react";
+import { postState, searchBarState } from "../states/atoms";
 
 
 function Navigator() {
-const [searchBar,setSearchBar] = useState("");
+const [searchBar,setSearchBar] = useRecoilState(searchBarState);
 const [getThePost, setThePost] = useRecoilState(postState)
 
 
 
 // ------ for the search bar ------------
-/* 
-const FilterItem = (search, item)=> {
 
-  return item.Filter(post => post.title.includes(search))
+function FilterItem (search, item) {
+
+  return item.filter(post => {
+    return search.toLowerCase() === "" ? post : post.tags.toLowerCase().includes(search)
+   
+  
+  })
 
  } 
- const getFilterItems = FilterItem(searchBar, getThePost);
- */
+
 
   const navigate = useNavigate();
 

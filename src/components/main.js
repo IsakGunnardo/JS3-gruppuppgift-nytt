@@ -1,13 +1,17 @@
 import { Link } from "react-router-dom";
 import "./main.css";
 import { RecoilRoot, useRecoilState } from "recoil";
-import { userState, allDatasState } from "../states/atoms";
+import { userState, allDatasState, searchBarState } from "../states/atoms";
+import { FilterItem } from "../utils/filterlist";
 import React from "react";
 
 export function Main() {
+  const [searchBar,setSearchBar] = useRecoilState(searchBarState);
   const [users, setUser] = useRecoilState(userState);
   const [allData, setAllData] = useRecoilState(allDatasState);
 
+  const filterData = FilterItem(searchBar,allData)
+  console.log(allData)
   if (Object.keys(allData).length === 0) {
     return (
       <div>
@@ -45,7 +49,7 @@ export function Main() {
         </div>
         <ul></ul>
         <ul>
-          {allData.map((holder, index) => {
+          {filterData.map((holder, index) => {
             let idIsInvalid = 0;
             if (holder.id === 151) {
               idIsInvalid = holder.userId;
@@ -68,13 +72,13 @@ export function Main() {
                 </h4>
                 <h5>
                   Tags:{" "}
-                  {Array.isArray(allData[index]?.tags)
-                    ? allData[index].tags.map((tag) => tag + " / ")
+                  {Array.isArray(filterData[index]?.tags)
+                    ? filterData[index].tags.map((tag) => tag + " / ")
                     : "No tags "}
                 </h5>
 
                 <Link
-                  to={`/post/${holder.id}/${allData[index]?.firstName}/${allData[index]?.lastName}/${index}`}
+                  to={`/post/${holder.id}/${filterData[index]?.firstName}/${filterData[index]?.lastName}/${index}`}
                   style={{ color: "black" }}
                   className="hover-link"
                 >

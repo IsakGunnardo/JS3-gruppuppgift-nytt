@@ -31,3 +31,7 @@ export const allDatasState = atom({
   default: [],
 });
 
+export const searchBarState = atom({
+  key:"searchBar",
+  default: ""
+})
