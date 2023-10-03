@@ -1,6 +1,5 @@
 import "./aside.css";
 
-
 export function AsideRight() {
   return (
     <>
@@ -8,17 +7,21 @@ export function AsideRight() {
         <div>
           <h2 className="sidebar-right-h2">POPULAR COMMUNITIES</h2>
           <ul>
-            <li> 
-              <a href="https://ecutbildning.se">Ec utbildning</a>                           
+            <li>
+              <a href="https://ecutbildning.se">Ec utbildning</a>
             </li>
             <li>
               <a href="https://react.dev/">React dev</a>
             </li>
             <li>
-              <a href="https://www.acouplecooks.com/best-cocktail-recipes-to-make-at-home/">A couple of drinks</a>
+              <a href="https://www.acouplecooks.com/best-cocktail-recipes-to-make-at-home/">
+                A couple of drinks
+              </a>
             </li>
             <li>
-              <a href="https://www.youtube.com/@WebDevSimplified">Web Dev Simplified</a>
+              <a href="https://www.youtube.com/@WebDevSimplified">
+                Web Dev Simplified
+              </a>
             </li>
             <li>
               <a href="https://www.reddit.com/r/Minecraft/">Minecraft</a>
@@ -26,9 +29,7 @@ export function AsideRight() {
           </ul>
           <button className="aside-right-btn">See more</button>
         </div>
-       
       </aside>
     </>
   );
 }
-

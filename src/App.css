@@ -1,7 +1,6 @@
-body{
+body {
   background-color: #ffffff;
 }
-
 
 .App {
   text-align: center;
@@ -22,16 +21,15 @@ body{
   color: #61dafb;
 }
 
-.content-container{
+.content-container {
   display: flex;
   flex-direction: row;
-  
 }
 
 .scroll-btn {
   position: fixed;
   bottom: 20px;
-  right: 10px ;
+  right: 10px;
   background-color: #0079d3;
   color: #ffff;
   border-radius: 10px, 10px, 10px;

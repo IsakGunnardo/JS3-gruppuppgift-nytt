@@ -76,10 +76,9 @@ function App() {
       <div className="container-appjs">
         {!isAddNewPostRoute && <AsideLeft />}
         <Routes>
-          
           <Route path="/addnewpost" element={<AddNewPost />} />
-         <Route path="/" element={<Home posts={posts} users={users} />} />
-         <Route
+          <Route path="/" element={<Home posts={posts} users={users} />} />
+          <Route
             path="/post/:id/:firstName/:lastName/:index"
             element={<OnePost />}
           />
@@ -95,14 +94,3 @@ function App() {
 }
 
 export default App;
-
-
-/*
- <Route
-            path="/post/:id/:firstName/:lastName/:index"
-            element={<OnePost />}
-          />
-*/
-
-
-// 

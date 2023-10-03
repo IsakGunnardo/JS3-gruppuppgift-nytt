@@ -22,7 +22,8 @@ export const addNewPost = atom({
     image: "",
     reactions: 0,
     title: "",
-    text: ""
+    text: "",
+    tags: [],
   },
 });
 
@@ -32,6 +33,16 @@ export const allDatasState = atom({
 });
 
 export const searchBarState = atom({
-  key:"searchBar",
-  default: ""
-})
+  key: "searchBaren",
+  default: "",
+});
+
+export const likePostState = atom({
+  key: "likePostState",
+  default: 0,
+});
+
+export const likeCommentsState = atom({
+  key: "likeCommentsState",
+  default: 0,
+});

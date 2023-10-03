@@ -6,12 +6,12 @@ import { FilterItem } from "../utils/filterlist";
 import React from "react";
 
 export function Main() {
-  const [searchBar,setSearchBar] = useRecoilState(searchBarState);
+  const [searchBar, setSearchBar] = useRecoilState(searchBarState);
   const [users, setUser] = useRecoilState(userState);
   const [allData, setAllData] = useRecoilState(allDatasState);
 
-  const filterData = FilterItem(searchBar,allData)
-  console.log(allData)
+  const filterData = FilterItem(searchBar, allData);
+
   if (Object.keys(allData).length === 0) {
     return (
       <div>
@@ -28,11 +28,8 @@ export function Main() {
               style={{ marginLeft: "5%" }}
               className="add-btn"
             />
-            {/* <button style={{ marginLeft: "2%" }} className="add-btn">
-            Create Post
-          </button> */}
           </Link>
-          <div style={{display: "flex", gap: "2rem", marginRight: "5px"}}>
+          <div style={{ display: "flex", gap: "2rem", marginRight: "5px" }}>
             <span className="btn-right">
               <p>Hot</p>
               <i className="arrow down"></i>
@@ -42,13 +39,13 @@ export function Main() {
               <i className="arrow down"></i>
             </span>
             <span className="btn-right">
-              <p>gridbild</p>
+              <p>⚙️</p>
               <i className="arrow down"></i>
             </span>
           </div>
         </div>
-        <ul></ul>
-        <ul>
+
+        <ul style={{ listStyle: "none" }}>
           {filterData.map((holder, index) => {
             let idIsInvalid = 0;
             if (holder.id === 151) {
@@ -57,31 +54,27 @@ export function Main() {
               idIsInvalid = holder.id;
             }
             return (
-              //kan vara bra att importera UUID - för att skapa unika keys (nu får ingen body se likadan ut) // nu funkar det, lösning key{math.random()} så det blir unika nycklar för postsen
               <li
                 key={Math.random()}
                 style={{ borderBottom: "1px solid black" }}
               >
-                <h3>Title: {holder.title}</h3>
-                <main>{holder.body}</main>
-
-                {holder && <img src={holder.image} width={25} height={25} />}
-
-                <h4>
-                  Creator: {holder.firstName} {holder.lastName}
-                </h4>
-                <h5>
-                  Tags:{" "}
-                  {Array.isArray(filterData[index]?.tags)
-                    ? filterData[index].tags.map((tag) => tag + " / ")
-                    : "No tags "}
-                </h5>
-
                 <Link
                   to={`/post/${holder.id}/${filterData[index]?.firstName}/${filterData[index]?.lastName}/${index}`}
-                  style={{ color: "black" }}
+                  style={{ color: "black", textDecoration: "none" }}
                   className="hover-link"
                 >
+                  <h3>Title: {holder.title}</h3>
+                  <main>{holder.body}</main>
+                  {holder && <img src={holder.image} width={25} height={25} />}
+                  <h4>
+                    Creator: {holder.firstName} {holder.lastName}
+                  </h4>
+                  <h5>
+                    Tags:{" "}
+                    {Array.isArray(filterData[index]?.tags)
+                      ? filterData[index].tags.map((tag) => tag + " / ")
+                      : "Life / History / Random"}
+                  </h5>
                   Read More
                 </Link>
               </li>

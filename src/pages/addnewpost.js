@@ -12,16 +12,14 @@ import {
   CodeSimple,
 } from "@phosphor-icons/react";
 
-
 //knappfunktionalitet
 export function AddNewPost() {
- const [users, setUser] = useRecoilState(userState);
+  const [users, setUser] = useRecoilState(userState);
   const [input, setInput] = useRecoilState(addNewPost);
   const [allData, setAllData] = useRecoilState(allDatasState);
 
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
-   
   };
 
   //Denna hittar firstname,lastname samt image --> läggs till i input objekt
@@ -32,12 +30,12 @@ export function AddNewPost() {
     return [firstName, lastName, img];
   };
 
-  const navigate = useNavigate()
- 
+  const navigate = useNavigate();
+
   //Postar samt fetchar AddPost via dummy, lägger sedan till det som saknas via findFirstName funktionen
   const handelClick = (e) => {
     e.preventDefault();
-    
+
     if (input.text.trim() === "") {
       alert("You have to put down some text");
       return;
@@ -49,7 +47,8 @@ export function AddNewPost() {
       input.id,
       input.firstName,
       input.lastName,
-      input.reactions
+      input.reactions,
+      input.tags
     )
       .then((input) => {
         const [first, secondName, img] = findFirstName();
@@ -57,17 +56,17 @@ export function AddNewPost() {
         input.lastName = secondName;
         input.image = img;
         input.reactions = 0;
+
         return input;
       })
       .then((newInput) => {
         setAllData([newInput, ...allData]);
       });
-      setInput({
-        title:"",
-        text: ""
-
-      })
-      navigate("/")
+    setInput({
+      title: "",
+      text: "",
+    });
+    navigate("/");
   };
   //denna tar enbart id till input
   function PeopleList({ users }) {
@@ -132,7 +131,6 @@ export function AddNewPost() {
         </div>
         <div className="new-post-textarea">
           <textarea
-            
             placeholder="Text(optional) Max 60 tecken"
             name="text"
             value={input.text}

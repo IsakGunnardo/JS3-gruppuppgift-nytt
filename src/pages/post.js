@@ -4,8 +4,14 @@ import { getOnePosts } from "../api/fetch";
 import { getAllComments } from "../api/fetch";
 import { AsideLeft } from "../components/asideleft";
 import { AsideRight } from "../components/asideright";
-import { RecoilRoot, useRecoilState } from "recoil";
-import { postState, allDatasState, commentState } from "../states/atoms";
+import { useRecoilState } from "recoil";
+import {
+  postState,
+  allDatasState,
+  commentState,
+  likeCommentsState,
+  likePostState,
+} from "../states/atoms";
 import "./pages.css";
 import { AddComment } from "../components/commetsAdd";
 import { ArrowFatDown, ArrowFatUp } from "@phosphor-icons/react";
@@ -16,17 +22,16 @@ export function OnePost() {
   const { id, firstName, lastName, index } = useParams();
   const [onePost, setOnePost] = useState({});
   const [allComments, setAllComments] = useRecoilState(commentState);
-  const [likeCommentBoolean,setLikeCommentBoolean] = useState(false);
-  /* const [allComments, setAllComments] = useState([]); */
-  const [likes, setLikes] = useState(0);
-  const [likeComment, setLikeComment] = useState(4);
-  const [likeBoolean,setLikeBoolean] = useState(false);
+
+  const [likes, setLikes] = useRecoilState(likePostState);
+  const [likeComment, setLikeComment] = useRecoilState(likeCommentsState);
+
   const [allData, setAllData] = useRecoilState(allDatasState);
   const [isClicked, setIsClicked] = useState(false);
 
   const handelClick = () => {
-    setIsClicked(true)
-  }
+    setIsClicked(true);
+  };
 
   useEffect(() => {
     if (id != 151) {
@@ -48,54 +53,46 @@ export function OnePost() {
     }
   }, [onePost]);
 
+  //kopplad till post// Uppdaterar bara nya posts likes, då vi fetchar onePost så resettas liksen varje gång.
+  useEffect(() => {
+    if (likes !== undefined) {
+      const tempCopy = [...allData];
+      tempCopy[index] = {
+        ...tempCopy[index],
+        reactions: likes,
+      };
+      setAllData(tempCopy);
+    }
+  }, [likes, index]);
+
   const increase = () => {
-    if(likeBoolean == false){ 
-      setLikes((like) => like + 1)
-      setLikeBoolean(!likeBoolean)
-  } else {
-    setLikes((like) => like - 1)
-    setLikeBoolean(!likeBoolean)
-  }
-   
+    setLikes((like) => like + 1);
   };
 
   const decrease = () => {
-    if(likeBoolean == false){ 
-      setLikes((like) => like - 1)
-      setLikeBoolean(!likeBoolean)
-  } else {
-    setLikes((like) => like + 1)
-    setLikeBoolean(!likeBoolean)
-  }
-   
+    setLikes((like) => like - 1);
   };
 
   const increaseComment = () => {
-    if(likeCommentBoolean == false){ 
-      setLikeComment((like) => like + 1)
-      setLikeCommentBoolean(!likeCommentBoolean)
-  } else {
-    setLikeComment((like) => like - 1)
-    setLikeCommentBoolean(!likeCommentBoolean)
-  }
+    setLikeComment((like) => like + 1);
   };
 
   const decreaseComment = () => {
-    if(likeCommentBoolean == false){ 
-      setLikeComment((like) => like - 1)
-      setLikeCommentBoolean(!likeCommentBoolean)
-  } else {
-    setLikeComment((like) => like + 1)
-    setLikeCommentBoolean(!likeCommentBoolean)
-  }
-  }; 
- 
+    setLikeComment((like) => like - 1);
+  };
+
   if (id == 151) {
     return (
       <>
         <div className="Post-container">
           <div className="Mid-Post-container">
-            <li style={{ borderBottom: "1px solid black" }}>
+            <li
+              style={{
+                borderBottom: "1px solid black",
+                listStyle: "none",
+                minWidth: "110vh",
+              }}
+            >
               <h4>by {firstName + " " + lastName}</h4>
 
               <h1>Title: {allData[index]?.title}</h1>
@@ -114,12 +111,12 @@ export function OnePost() {
                 Tags:{" "}
                 {Array.isArray(allData[index]?.tags)
                   ? allData[index].tags.map((tag) => tag + " / ")
-                  : "No tags available"}
+                  : "Life / History / Random"}
               </h4>
             </li>
 
             <AddComment />
-            <ul>
+            <ul style={{ listStyle: "none" }}>
               {allComments.map((comment, index) => (
                 <li key={index} className="Comment-container">
                   <h4 style={{ fontWeight: "1200", fontSize: "larger" }}>
@@ -147,35 +144,37 @@ export function OnePost() {
       <>
         <div className="Post-container">
           <div className="Mid-Post-container">
-            <li style={{ borderBottom: "1px solid black" }}>
+            <li style={{ borderBottom: "1px solid black", listStyle: "none" }}>
               <h4>by {firstName + " " + lastName}</h4>
               <h1>{onePost.title}</h1>
               <main>{onePost.body}</main>
 
               <div className="Reaction-container">
-                <button className={`like-btn-positive ${isClicked ? 'grow-btn' : ''}`} 
+                <button
+                  className={`like-btn-positive ${isClicked ? "grow-btn" : ""}`}
                   onClick={() => {
                     increase();
                     handelClick();
                   }}
-                >                  
-                  <ArrowFatUp size={30} style={{color: "green"}}/>                  
+                >
+                  <ArrowFatUp size={30} style={{ color: "green" }} />
                 </button>
                 <span>{likes}</span>
-                <button className={`like-btn-negative ${isClicked ? 'grow-btn' : ''}`} 
+                <button
+                  className={`like-btn-negative ${isClicked ? "grow-btn" : ""}`}
                   onClick={() => {
                     decrease();
                     handelClick();
-                  }}                  
+                  }}
                 >
-                  <ArrowFatDown size={30} style={{color: "red"}}/>                
+                  <ArrowFatDown size={30} style={{ color: "red" }} />
                 </button>
               </div>
               <h4>
                 Tags:{" "}
                 {Array.isArray(onePost.tags)
                   ? onePost.tags.map((tag) => tag + " / ")
-                  : "No tags available"}
+                  : "Life / History / Random"}
               </h4>
             </li>
 
@@ -205,6 +204,3 @@ export function OnePost() {
     );
   }
 }
-
-//ändrat 121  <h5>Comment: {comment.body}</h5>
-// rad 76 ligger en "?"

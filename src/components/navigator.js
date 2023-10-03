@@ -6,28 +6,27 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import Modal from "./modal";
 import styles from "./modal.css";
-import { MagnifyingGlass, GoogleLogo, AppleLogo, KeyReturn } from "@phosphor-icons/react";
+import {
+  MagnifyingGlass,
+  GoogleLogo,
+  AppleLogo,
+  KeyReturn,
+} from "@phosphor-icons/react";
 import { postState, searchBarState } from "../states/atoms";
 
-
 function Navigator() {
-const [searchBar,setSearchBar] = useRecoilState(searchBarState);
-const [getThePost, setThePost] = useRecoilState(postState)
+  const [searchBar, setSearchBar] = useRecoilState(searchBarState);
+  const [getThePost, setThePost] = useRecoilState(postState);
 
+  // ------ for the search bar ------------
 
-
-// ------ for the search bar ------------
-
-function FilterItem (search, item) {
-
-  return item.filter(post => {
-    return search.toLowerCase() === "" ? post : post.tags.toLowerCase().includes(search)
-   
-  
-  })
-
- } 
-
+  function FilterItem(search, item) {
+    return item.filter((post) => {
+      return search.toLowerCase() === ""
+        ? post
+        : post.tags.toLowerCase().includes(search);
+    });
+  }
 
   const navigate = useNavigate();
 
@@ -38,6 +37,7 @@ function FilterItem (search, item) {
   const handelClickS = () => {
     if (signUp === false) {
       setSignUp(true);
+      setLogIn(false);
     } else {
       setSignUp(false);
     }
@@ -45,6 +45,7 @@ function FilterItem (search, item) {
   const handelClickL = () => {
     if (logIn === false) {
       setLogIn(true);
+      setSignUp(false);
     } else {
       setLogIn(false);
     }
@@ -59,12 +60,16 @@ function FilterItem (search, item) {
       setSignUp(true);
     }
   };
- // 
+
   return (
     <nav className="navigator">
       <img className="logo" src={logo} onClick={() => navigate("/")} />
       <MagnifyingGlass size={20} className="MagnifyingGlass" />
-      <input className="input" placeholder="Search Reddit" onChange={(e) => setSearchBar(e.target.value)}/>
+      <input
+        className="input"
+        placeholder="Search Reddit"
+        onChange={(e) => setSearchBar(e.target.value)}
+      />
 
       <button onClick={handelClickS} className="sign-up-btn">
         Sign up
