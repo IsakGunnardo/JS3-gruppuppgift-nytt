@@ -3,11 +3,31 @@ import logo from "./picture/reddit-logo-text.png";
 import style from "./navigator.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useRecoilState } from "recoil";
 import Modal from "./modal";
 import styles from "./modal.css";
-import { MagnifyingGlass, GoogleLogo, AppleLogo } from "@phosphor-icons/react";
+import {
+  MagnifyingGlass,
+  GoogleLogo,
+  AppleLogo,
+  KeyReturn,
+} from "@phosphor-icons/react";
+import { postState, searchBarState } from "../states/atoms";
 
 function Navigator() {
+  const [searchBar, setSearchBar] = useRecoilState(searchBarState);
+  const [getThePost, setThePost] = useRecoilState(postState);
+
+  // ------ for the search bar ------------
+
+  function FilterItem(search, item) {
+    return item.filter((post) => {
+      return search.toLowerCase() === ""
+        ? post
+        : post.tags.toLowerCase().includes(search);
+    });
+  }
+
   const navigate = useNavigate();
 
   // ---------- for the modal -----------------------------------------------
@@ -17,6 +37,7 @@ function Navigator() {
   const handelClickS = () => {
     if (signUp === false) {
       setSignUp(true);
+      setLogIn(false);
     } else {
       setSignUp(false);
     }
@@ -24,6 +45,7 @@ function Navigator() {
   const handelClickL = () => {
     if (logIn === false) {
       setLogIn(true);
+      setSignUp(false);
     } else {
       setLogIn(false);
     }
@@ -38,12 +60,16 @@ function Navigator() {
       setSignUp(true);
     }
   };
-  // -----------------------------------------------------------------------------
+
   return (
     <nav className="navigator">
       <img className="logo" src={logo} onClick={() => navigate("/")} />
       <MagnifyingGlass size={20} className="MagnifyingGlass" />
-      <input className="input" placeholder="Search Reddit" />
+      <input
+        className="input"
+        placeholder="Search Reddit"
+        onChange={(e) => setSearchBar(e.target.value)}
+      />
 
       <button onClick={handelClickS} className="sign-up-btn">
         Sign up
@@ -69,12 +95,12 @@ function Navigator() {
             weight="bold"
             className="modal-logo"
           />
-          Continue whit Google
+          Continue with Google
         </div>
         <div className="modal-btn1">
           {" "}
           <AppleLogo size={20} className="modal-logo" />
-          Continue whit Apple
+          Continue with Apple
         </div>
         <span className="modal-or">-----------------OR----------------</span>
         <input className="modal-input" placeholder="Email" />
@@ -103,12 +129,12 @@ function Navigator() {
             weight="bold"
             className="modal-logo"
           />
-          Continue whit Google
+          Continue with Google
         </div>
         <div className="modal-btn1">
           {" "}
           <AppleLogo size={20} className="modal-logo" />
-          Continue whit Apple
+          Continue with Apple
         </div>
         <span className="modal-or">-----------------OR----------------</span>
         <input className="modal-input" placeholder="Username" />

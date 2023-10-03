@@ -1,4 +1,3 @@
-
 export async function getAllPosts() {
   try {
     let result = await fetch("https://dummyjson.com/posts");
@@ -13,15 +12,29 @@ export async function getAllPosts() {
 }
 
 export async function getAllComments() {
-  let result = await fetch("https://dummyjson.com/comments");
-  let json = await result.json();
-  return json;
+  try {
+    let result = await fetch("https://dummyjson.com/comments");
+    if (!result.ok) {
+      throw new Error("Fetch failure");
+    }
+    let json = await result.json();
+    return json;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export async function getAllUsers() {
-  let result = await fetch("https://dummyjson.com/users");
-  let json = await result.json();
-  return json;
+  try {
+    let result = await fetch("https://dummyjson.com/users");
+    if (!result.ok) {
+      throw new Error("Fetch failure");
+    }
+    let json = await result.json();
+    return json;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export async function getOnePosts({ id }) {
@@ -30,41 +43,49 @@ export async function getOnePosts({ id }) {
   return json;
 }
 
-
- export async function fetchAPost(title, body, id , firstName, lastName) {
-
-  let result = await fetch("https://dummyjson.com/posts/add", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      Id: id,
-      title: title,
-      body: body,
-      userId: id,
-      firstName: firstName,
-      lastName: lastName
-      
-    })
-  });
-  let json = await result.json();
+export async function createANewPost(title, body, id, firstName, lastName) {
+  try {
+    let result = await fetch("https://dummyjson.com/posts/add", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        Id: id,
+        title: title,
+        body: body,
+        userId: id,
+        firstName: firstName,
+        lastName: lastName,
+      }),
+    });
+    if (!result.ok) {
+      throw new Error("Fetch failure");
+    }
+    let json = await result.json();
     return json;
+  } catch (error) {
+    throw error;
+  }
 }
 
-
-   
-/*
-import { useEffect, useState } from "react";
-//Försöka att skapa en 
-export function getAllComments({comments}) {
-    const [api, setApi] = useState("posts");
-    const comments = () => {setApi(...api, comments)}
-    
- 
-    useEffect(() => {
-        let result = await fetch(`https://dummyjson.com/${api}`);
-        let json = await result.json();
-        return json;
-    },[api]);
-      
-} 
-*/
+export async function addAComment(body, name, id) {
+  try {
+    let result = await fetch("https://dummyjson.com/comments/add", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: 151,
+        body: body,
+        postId: 62,
+        userId: id,
+        userUsername: name,
+      }),
+    });
+    if (!result.ok) {
+      throw new Error("Fetch failure");
+    }
+    let json = await result.json();
+    return json;
+  } catch (error) {
+    throw error;
+  }
+}

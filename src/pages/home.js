@@ -5,14 +5,17 @@ import { AsideRight } from "../components/asideright";
 import { Main } from "../components/main";
 
 import { useRecoilState } from "recoil";
-import { postState, userState, commentState } from "../states/atoms";
+import {
+  postState,
+  userState,
+  commentState,
+  allDatasState,
+} from "../states/atoms";
 
-export function Home({posts, users}) {
+export function Home({ allData, posts, users }) {
   return (
     <div className="Home-container">
-
-      <Main posts={posts} users={users} />
-
+      <Main posts={posts} users={users} allData={allData} />
     </div>
   );
 }

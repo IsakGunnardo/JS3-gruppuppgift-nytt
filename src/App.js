@@ -15,12 +15,18 @@ import Navigator from "./components/navigator";
 import { Route, Routes, useLocation } from "react-router-dom";
 
 import { useRecoilState } from "recoil";
-import { postState, userState, commentState } from "./states/atoms";
+import {
+  postState,
+  userState,
+  commentState,
+  allDatasState,
+} from "./states/atoms";
 
 function App() {
   const [posts, setPosts] = useRecoilState(postState);
   const [comments, setComments] = useRecoilState(commentState);
   const [users, setUsers] = useRecoilState(userState);
+  const [allData, setAllData] = useRecoilState(allDatasState);
 
   const location = useLocation();
   const isAddNewPostRoute = location.pathname === "/addnewpost";
@@ -36,22 +42,49 @@ function App() {
     getAllPosts().then((result) => setPosts(result.posts));
     getAllComments().then((result) => setComments(result.comments));
     getAllUsers().then((result) => setUsers(result.users));
-  }, []);
 
-   //<Home posts={posts} users={users} />;  denna överflödig?
+    //  funktion för o kombinera users och "posts" i samma array med objekt.
+    let userData = [];
+    let postData = [];
+
+    const fetchData = async () => {
+      try {
+        const usersResult = await getAllUsers();
+        userData = usersResult.users;
+
+        const postsResult = await getAllPosts();
+        postData = postsResult.posts;
+
+        //sätter ihop userdatan med postdatan via deras gemensamma id, till samma objekt.
+        const mergedData = userData.map((user) => ({
+          ...user,
+          ...postData.find((post) => post.id === user.id),
+        }));
+
+        setAllData(mergedData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
       <Navigator />
       <div className="container-appjs">
-      {!isAddNewPostRoute && ( <AsideLeft /> )}
-      <Routes>        
-        <Route path="/" element={<Home posts={posts} users={users} />} />
-        <Route path="/addnewpost" element={<AddNewPost />} />
-        <Route path="/post/:id/:firstName/:lastName" element={<OnePost />} />
-      </Routes>
-      {!isAddNewPostRoute && ( <AsideRight /> )}
-      </div>      
+        {!isAddNewPostRoute && <AsideLeft />}
+        <Routes>
+          <Route path="/addnewpost" element={<AddNewPost />} />
+          <Route path="/" element={<Home posts={posts} users={users} />} />
+          <Route
+            path="/post/:id/:firstName/:lastName/:index"
+            element={<OnePost />}
+          />
+        </Routes>
+        {!isAddNewPostRoute && <AsideRight />}
+      </div>
       <div className="content-container"></div>
       <button className="scroll-btn" onClick={scrollBackTop}>
         Back to top
@@ -61,51 +94,3 @@ function App() {
 }
 
 export default App;
-
-
-
-/*
-/*
-
-// https://reactrouter.com/en/main/hooks/use-navigate
-
-function CommentKomponent ({ comments }) {
-  return (
-    <ul>
-      {comments.map((holder, index) => {
-        return (
-        <li key={index}>{holder.body} </li>
-      )})}
-    </ul>
-  )
-}
-*/
-/* function PostKomponent({ posts }) {
-  return (
-    <ul>
-      {posts.map((holder, index) => (
-        <li key={index}>{holder.body}</li>
-      ))}
-    </ul>
-  );
-} <h1>Users</h1>
- <PostKomponent posts={posts} />       <PeopleList users={users} />
-       
-        <h2>Comments</h2>
-        <CommentKomponent comments={comments} />   */
-
-//const [posts, setPosts] = useState([]);
-
-//console.log("USERS: ", users);
-//console.log("POSTS: ", posts);
-
-
-
-
-/*
-const AddPostViewConst = {} => (
-  <div>
-    <AddNewPost />
-  </div>
-)
-*/
