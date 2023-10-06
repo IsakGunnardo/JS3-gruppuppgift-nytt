@@ -31,7 +31,7 @@ export function AddNewPost() {
   };
 
   const navigate = useNavigate();
-
+  console.log(allData)
   //Postar samt fetchar AddPost via dummy, lägger sedan till det som saknas via findFirstName funktionen
   const handelClick = (e) => {
     e.preventDefault();

@@ -9,22 +9,20 @@ import {
   postState,
   allDatasState,
   commentState,
-  likeCommentsState,
+ 
   likePostState,
 } from "../states/atoms";
 import "./pages.css";
 import { AddComment } from "../components/commetsAdd";
 import { ArrowFatDown, ArrowFatUp } from "@phosphor-icons/react";
 
-// kvar o göra är att fixa så reaktionerna uppdateras i allData
-//Fetchar en post om det inte är en egenskapad "post", och visar sedan en single post
+
 export function OnePost() {
   const { id, firstName, lastName, index } = useParams();
   const [onePost, setOnePost] = useState({});
   const [allComments, setAllComments] = useRecoilState(commentState);
 
   const [likes, setLikes] = useRecoilState(likePostState);
-  const [likeComment, setLikeComment] = useRecoilState(likeCommentsState);
 
   const [allData, setAllData] = useRecoilState(allDatasState);
   const [isClicked, setIsClicked] = useState(false);
@@ -39,13 +37,6 @@ export function OnePost() {
     }
   }, [id]);
 
-  /////////////////////////UseEffect körs redan i App.js så behövs ej här
-  /*  useEffect(() => {
-    getAllComments().then((result) =>
-      setAllComments(result.comments, ...allComments)
-    );
-    console.log(allComments);
-  }, []); */
 
   useEffect(() => {
     if (onePost.reactions !== undefined) {
@@ -65,6 +56,7 @@ export function OnePost() {
     }
   }, [likes, index]);
 
+
   const increase = () => {
     setLikes((like) => like + 1);
   };
@@ -73,15 +65,31 @@ export function OnePost() {
     setLikes((like) => like - 1);
   };
 
-  const increaseComment = () => {
-    setLikeComment((like) => like + 1);
-  };
+  const likeComment = (comment) => {
+    //om kommentaren matchar någonting i listan så kommer den valda kommentaren kopieras och lägga till + 1 på likes
+   setAllComments(allComments.map((all) =>{
+   
+     if( all === comment){
+        return {...comment, like: comment.like + 1}}
+        return all;
+    
+   }))
+ 
+ }
 
-  const decreaseComment = () => {
-    setLikeComment((like) => like - 1);
-  };
+ const disLikeComment = (comment) => {
+  //om kommentaren matchar någonting i listan så kommer den valda kommentaren kopieras och lägga till + 1 på likes
+    setAllComments(allComments.map((all) =>{
+ 
+   if( all === comment){
+      return {...comment, like: comment.like - 1}}
+      return all;
+  
+ }))
+   }
 
-  if (id == 151) {
+
+ if (id == 151) {
     return (
       <>
         <div className="Post-container">
@@ -124,11 +132,11 @@ export function OnePost() {
                   </h4>
                   <h5>Comment: {comment.body}</h5>
                   <div className="Reaction-container">
-                    <button onClick={increaseComment}>
+                    <button >
                       <ArrowFatUp size={25} />
                     </button>
-                    <span>{likeComment}</span>
-                    <button onClick={decreaseComment}>
+                    <span></span>
+                    <button >
                       <ArrowFatDown size={25} />
                     </button>
                   </div>
@@ -179,7 +187,7 @@ export function OnePost() {
             </li>
 
             <AddComment />
-            <ul>
+           <ul>
               {allComments.map((comment, index) => (
                 <li key={index} className="Comment-container">
                   <h4 style={{ fontWeight: "1200", fontSize: "larger" }}>
@@ -187,13 +195,14 @@ export function OnePost() {
                   </h4>
                   <h5>Comment: {comment && comment.body}</h5>
                   <div className="Reaction-container">
-                    <button onClick={increaseComment}>
-                      <ArrowFatUp size={25} />
+                    <button><ArrowFatUp size={25} onClick={() => likeComment(comment)} /></button>
+    
+                    <span>{comment.like}</span>
+                    <button>
+                      <ArrowFatDown size={25} onClick={() => disLikeComment(comment)}/>
                     </button>
-                    <span>{likeComment}</span>
-                    <button onClick={decreaseComment}>
-                      <ArrowFatDown size={25} />
-                    </button>
+                      
+                    
                   </div>
                 </li>
               ))}

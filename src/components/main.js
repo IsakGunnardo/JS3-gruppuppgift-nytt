@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./main.css";
 import { RecoilRoot, useRecoilState } from "recoil";
-import { userState, allDatasState, searchBarState } from "../states/atoms";
+import { userState, allDatasState, searchBarState, likeCommentsState } from "../states/atoms";
 import { FilterItem } from "../utils/filterlist";
 import React from "react";
 
@@ -9,6 +9,8 @@ export function Main() {
   const [searchBar, setSearchBar] = useRecoilState(searchBarState);
   const [users, setUser] = useRecoilState(userState);
   const [allData, setAllData] = useRecoilState(allDatasState);
+  const [likeComment,setLikeComment] = useRecoilState(likeCommentsState);
+
 
   const filterData = FilterItem(searchBar, allData);
 
@@ -62,6 +64,7 @@ export function Main() {
                   to={`/post/${holder.id}/${filterData[index]?.firstName}/${filterData[index]?.lastName}/${index}`}
                   style={{ color: "black", textDecoration: "none" }}
                   className="hover-link"
+                  onClick={() => {}}
                 >
                   <h3>Title: {holder.title}</h3>
                   <main>{holder.body}</main>

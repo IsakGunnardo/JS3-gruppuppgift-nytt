@@ -1,9 +1,8 @@
 import "./App.css";
 import "./components/aside.css";
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-import { Main } from "./components/main";
 import { Home } from "./pages/home";
 import { AddNewPost } from "./pages/addnewpost";
 import { OnePost } from "./pages/post";
@@ -40,9 +39,9 @@ function App() {
 
   useEffect(() => {
     getAllPosts().then((result) => setPosts(result.posts));
-    getAllComments().then((result) => setComments(result.comments));
+    getAllComments().then((result) => setComments(result.comments.map(comment => ({...comment, like : Math.floor(Math.random() * 20)}))));
     getAllUsers().then((result) => setUsers(result.users));
-
+   
     //  funktion för o kombinera users och "posts" i samma array med objekt.
     let userData = [];
     let postData = [];
