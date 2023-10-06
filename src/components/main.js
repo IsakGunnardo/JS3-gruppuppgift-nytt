@@ -9,8 +9,7 @@ export function Main() {
   const [searchBar, setSearchBar] = useRecoilState(searchBarState);
   const [users, setUser] = useRecoilState(userState);
   const [allData, setAllData] = useRecoilState(allDatasState);
-  const [likeComment,setLikeComment] = useRecoilState(likeCommentsState);
-
+  const [likeComment, setLikeComment] = useRecoilState(likeCommentsState);
 
   const filterData = FilterItem(searchBar, allData);
 
@@ -55,6 +54,8 @@ export function Main() {
             } else {
               idIsInvalid = holder.id;
             }
+            const maxWordsDisplayedInBody = holder.body.substring(0, 60); // plockar ut de första 60 karaktärerna ur inlägget
+
             return (
               <li
                 key={Math.random()}
@@ -64,10 +65,10 @@ export function Main() {
                   to={`/post/${holder.id}/${filterData[index]?.firstName}/${filterData[index]?.lastName}/${index}`}
                   style={{ color: "black", textDecoration: "none" }}
                   className="hover-link"
-                  onClick={() => {}}
+                  onClick={() => { }}
                 >
                   <h3>Title: {holder.title}</h3>
-                  <main>{holder.body}</main>
+                  <main >{maxWordsDisplayedInBody}...</main>
                   {holder && <img src={holder.image} width={25} height={25} />}
                   <h4>
                     Creator: {holder.firstName} {holder.lastName}

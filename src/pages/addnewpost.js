@@ -131,7 +131,7 @@ export function AddNewPost() {
         </div>
         <div className="new-post-textarea">
           <textarea
-            placeholder="Text(optional) Max 60 tecken"
+            placeholder="Skriv din text här"
             name="text"
             value={input.text}
             onChange={handleChange}

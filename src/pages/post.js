@@ -9,7 +9,7 @@ import {
   postState,
   allDatasState,
   commentState,
- 
+
   likePostState,
 } from "../states/atoms";
 import "./pages.css";
@@ -67,29 +67,33 @@ export function OnePost() {
 
   const likeComment = (comment) => {
     //om kommentaren matchar någonting i listan så kommer den valda kommentaren kopieras och lägga till + 1 på likes
-   setAllComments(allComments.map((all) =>{
-   
-     if( all === comment){
-        return {...comment, like: comment.like + 1}}
-        return all;
-    
-   }))
- 
- }
-
- const disLikeComment = (comment) => {
-  //om kommentaren matchar någonting i listan så kommer den valda kommentaren kopieras och lägga till + 1 på likes
-    setAllComments(allComments.map((all) =>{
- 
-   if( all === comment){
-      return {...comment, like: comment.like - 1}}
+    setAllComments(allComments.map((all) => {
+      console.log("like")
+      if (all === comment) {
+        return { ...comment, like: comment.like + 1 }
+      }
       return all;
-  
- }))
-   }
+
+    }))
+
+  }
+
+  const disLikeComment = (comment) => {
+    console.log("dislike")
+
+    //om kommentaren matchar någonting i listan så kommer den valda kommentaren kopieras och lägga till + 1 på likes
+    setAllComments(allComments.map((all) => {
+
+      if (all === comment) {
+        return { ...comment, like: comment.like - 1 }
+      }
+      return all;
+
+    }))
+  }
 
 
- if (id == 151) {
+  if (id == 151) {
     return (
       <>
         <div className="Post-container">
@@ -108,11 +112,11 @@ export function OnePost() {
 
               <div className="Reaction-container">
                 <button onClick={increase}>
-                  <ArrowFatUp size={30} />
+                  <ArrowFatUp size={30} style={{ color: "green" }} />
                 </button>
                 <span>{likes}</span>
                 <button onClick={decrease}>
-                  <ArrowFatDown size={30} />
+                  <ArrowFatDown size={30} style={{ color: "red" }} />
                 </button>
               </div>
               <h4>
@@ -128,16 +132,17 @@ export function OnePost() {
               {allComments.map((comment, index) => (
                 <li key={index} className="Comment-container">
                   <h4 style={{ fontWeight: "1200", fontSize: "larger" }}>
-                    User: {comment.user?.username}
+                    User: {comment && comment.user?.username}
                   </h4>
-                  <h5>Comment: {comment.body}</h5>
+                  <h5>Comment: {comment && comment.body}</h5>
                   <div className="Reaction-container">
                     <button >
-                      <ArrowFatUp size={25} />
+                      <ArrowFatUp size={25} onClick={() => likeComment(comment)} />
                     </button>
-                    <span></span>
+                    <span>{comment.like}</span>
                     <button >
-                      <ArrowFatDown size={25} />
+                      <ArrowFatDown size={25} onClick={() => disLikeComment(comment)} />
+
                     </button>
                   </div>
                 </li>
@@ -187,7 +192,7 @@ export function OnePost() {
             </li>
 
             <AddComment />
-           <ul>
+            <ul>
               {allComments.map((comment, index) => (
                 <li key={index} className="Comment-container">
                   <h4 style={{ fontWeight: "1200", fontSize: "larger" }}>
@@ -196,13 +201,13 @@ export function OnePost() {
                   <h5>Comment: {comment && comment.body}</h5>
                   <div className="Reaction-container">
                     <button><ArrowFatUp size={25} onClick={() => likeComment(comment)} /></button>
-    
+
                     <span>{comment.like}</span>
                     <button>
-                      <ArrowFatDown size={25} onClick={() => disLikeComment(comment)}/>
+                      <ArrowFatDown size={25} onClick={() => disLikeComment(comment)} />
                     </button>
-                      
-                    
+
+
                   </div>
                 </li>
               ))}
